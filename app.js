@@ -5,10 +5,34 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+//webpack
+const webpack = require('webpack');
+const webpackMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const config = require('./webpack.config.js');
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+
+  const compiler = webpack(config);
+  const middleware = webpackMiddleware(compiler, {
+    publicPath: config.output.publicPath,
+    contentBase: config.devServer.contentBase,
+    stats: {
+      colors: true,
+      hash: false,
+      timings: true,
+      chunks: false,
+      chunkModules: false,
+      modules: false
+    }
+  });
+
+  app.use(middleware);
+  app.use(webpackHotMiddleware(compiler));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,10 +44,14 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'dist')));
 
-app.use('/', index);
-app.use('/users', users);
+app.get('*',function(req,res){
+	console.log(req.url);
+	res.sendFile(path.join(__dirname,'dist/index.html'),{
+		headers:{'Content-Type':'text/html'}
+	});
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -22,7 +22,7 @@ module.exports={
 				use:{
 					loader:'babel-loader',
 					query:{
-						presets:[['env',{ "modules": false }],'react'],
+						presets:[['env',{ "modules": false }],'react','stage-0'],
 						plugins: ['transform-runtime']
 					}
 				}
