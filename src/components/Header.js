@@ -66,7 +66,7 @@ class Header extends React.Component{
 		    </form>
 		    <div className="btn-group" role="group" aria-label="Button group">
 		    	<button type="button" className="btn btn-primary">Login</button>
-		    	<button type="button" onClick={this.handleRoute.bind(this,'/user')} className="btn btn-outline-warning">Register</button>
+		    	<button type="button" onClick={this.handleRoute.bind(this,'/register')} className="btn btn-outline-warning">Register</button>
 		    </div>
 		  </div>
 		</nav>

@@ -32776,7 +32776,7 @@ var Header = function (_React$Component) {
 						),
 						__WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
 							'button',
-							{ type: 'button', onClick: this.handleRoute.bind(this, '/user'), className: 'btn btn-outline-warning' },
+							{ type: 'button', onClick: this.handleRoute.bind(this, '/register'), className: 'btn btn-outline-warning' },
 							'Register'
 						)
 					)
@@ -33424,4 +33424,4 @@ module.exports = function (css) {
 
 /***/ })
 ],[182]);
-//# sourceMappingURL=app.2e224f24c6909495ef9b.js.map
+//# sourceMappingURL=app.300ac933e27cabfc13b9.js.map

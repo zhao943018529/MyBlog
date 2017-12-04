@@ -11,8 +11,12 @@ const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('./webpack.config.js');
 
+//mongodb
+const db = require('./mongodb/db');
+
 var index = require('./routes/index');
 var users = require('./routes/users');
+const register = require('./routes/register');
 
 var app = express();
 
@@ -42,9 +46,11 @@ app.set('view engine', 'ejs');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'dist')));
+
+app.use('/register',register);
 
 app.get('*',function(req,res){
 	console.log(req.url);
