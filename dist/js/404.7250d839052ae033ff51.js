@@ -1,54 +1,10 @@
-webpackJsonp([0],{
+webpackJsonp([3],{
 
-/***/ 398:
+/***/ 403:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_redux__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_UserView__ = __webpack_require__(401);
-
-
-
-var mapStateToProps = function mapStateToProps(state) {
-	return {
-		user: state.user
-	};
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(__WEBPACK_IMPORTED_MODULE_0_react_redux__["b" /* connect */])(mapStateToProps)(__WEBPACK_IMPORTED_MODULE_1__components_UserView__["a" /* default */]));
-
-/***/ }),
-
-/***/ 399:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-var initialState = {
-	user: {
-		id: 'qwe123',
-		nickname: 'Ninja',
-		username: 'zha0943018529'
-	}
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (function () {
-	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-	var action = arguments[1];
-
-	switch (action.type) {
-		default:
-			return state;
-	}
-});
-
-/***/ }),
-
-/***/ 401:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_get_prototype_of__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_get_prototype_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_get_prototype_of__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(108);
@@ -68,32 +24,36 @@ var initialState = {
 
 
 
-var UserView = function (_React$Component) {
-	__WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits___default()(UserView, _React$Component);
+var PageNotFound = function (_React$Component) {
+	__WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits___default()(PageNotFound, _React$Component);
 
-	function UserView() {
-		__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default()(this, UserView);
+	function PageNotFound() {
+		__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default()(this, PageNotFound);
 
-		return __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn___default()(this, (UserView.__proto__ || __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_get_prototype_of___default()(UserView)).apply(this, arguments));
+		return __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn___default()(this, (PageNotFound.__proto__ || __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_get_prototype_of___default()(PageNotFound)).apply(this, arguments));
 	}
 
-	__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass___default()(UserView, [{
+	__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass___default()(PageNotFound, [{
 		key: 'render',
 		value: function render() {
 			return __WEBPACK_IMPORTED_MODULE_5_react___default.a.createElement(
 				'div',
 				null,
-				'UserView'
+				__WEBPACK_IMPORTED_MODULE_5_react___default.a.createElement(
+					'h1',
+					{ style: { color: 'red', marginTop: '30px' } },
+					'404'
+				)
 			);
 		}
 	}]);
 
-	return UserView;
+	return PageNotFound;
 }(__WEBPACK_IMPORTED_MODULE_5_react___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["a"] = (UserView);
+/* harmony default export */ __webpack_exports__["default"] = (PageNotFound);
 
 /***/ })
 
 });
-//# sourceMappingURL=user.a95259bd39ce36a1461b.js.map
+//# sourceMappingURL=404.7250d839052ae033ff51.js.map

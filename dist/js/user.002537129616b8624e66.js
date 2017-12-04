@@ -1,26 +1,51 @@
 webpackJsonp([1],{
 
-/***/ 397:
+/***/ 401:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_redux__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_HomeView__ = __webpack_require__(400);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_UserView__ = __webpack_require__(406);
 
 
 
 var mapStateToProps = function mapStateToProps(state) {
 	return {
-		home: state.home
+		user: state.user
 	};
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(__WEBPACK_IMPORTED_MODULE_0_react_redux__["b" /* connect */])(mapStateToProps)(__WEBPACK_IMPORTED_MODULE_1__components_HomeView__["a" /* default */]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(__WEBPACK_IMPORTED_MODULE_0_react_redux__["b" /* connect */])(mapStateToProps)(__WEBPACK_IMPORTED_MODULE_1__components_UserView__["a" /* default */]));
 
 /***/ }),
 
-/***/ 400:
+/***/ 402:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var initialState = {
+	user: {
+		id: 'qwe123',
+		nickname: 'Ninja',
+		username: 'zha0943018529'
+	}
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	var action = arguments[1];
+
+	switch (action.type) {
+		default:
+			return state;
+	}
+});
+
+/***/ }),
+
+/***/ 406:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43,32 +68,32 @@ var mapStateToProps = function mapStateToProps(state) {
 
 
 
-var HomeView = function (_React$Component) {
-	__WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits___default()(HomeView, _React$Component);
+var UserView = function (_React$Component) {
+	__WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits___default()(UserView, _React$Component);
 
-	function HomeView() {
-		__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default()(this, HomeView);
+	function UserView() {
+		__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default()(this, UserView);
 
-		return __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn___default()(this, (HomeView.__proto__ || __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_get_prototype_of___default()(HomeView)).apply(this, arguments));
+		return __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn___default()(this, (UserView.__proto__ || __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_get_prototype_of___default()(UserView)).apply(this, arguments));
 	}
 
-	__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass___default()(HomeView, [{
+	__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass___default()(UserView, [{
 		key: 'render',
 		value: function render() {
 			return __WEBPACK_IMPORTED_MODULE_5_react___default.a.createElement(
 				'div',
 				null,
-				'HomeView'
+				'UserView'
 			);
 		}
 	}]);
 
-	return HomeView;
+	return UserView;
 }(__WEBPACK_IMPORTED_MODULE_5_react___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["a"] = (HomeView);
+/* harmony default export */ __webpack_exports__["a"] = (UserView);
 
 /***/ })
 
 });
-//# sourceMappingURL=home.9cdeaec6e8b096feb63d.js.map
+//# sourceMappingURL=user.002537129616b8624e66.js.map

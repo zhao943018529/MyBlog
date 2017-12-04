@@ -10,11 +10,12 @@ export default function makeRootReducer(asyncReducers){
 
 
 
-export const injectReducers = (...reducers)=>{
-	let asyncReducers = {};
-	reducers.forEach(reducer=>{
-		asyncReducers[reducer.key]=reducer.reducer;
-	});
+export const injectReducers = (store, reducers) => {
+	if (reducers) {
+		reducers.forEach(reducer => {
+			store.asyncReducers[reducer.key] = reducer.reducer;
+		});
+	}
 
-	return makeRootReducer(asyncReducers);
+	return makeRootReducer(store.asyncReducers);
 }
