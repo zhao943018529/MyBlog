@@ -8,7 +8,7 @@ export default (store) => ({
 			const HomeReducer = require('../../reducers/HomeReducer').default;
 			let newReducer = injectReducers(store, [{ key: 'home', reducer: HomeReducer}]);
 			console.log(nextState);
-			store.reset(newReducer,{routing:store.getState().routing});
+			store.reset(newReducer);
 			cb(null, HomeView)
 		}, 'home')
 	}

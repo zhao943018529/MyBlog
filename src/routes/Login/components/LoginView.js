@@ -2,7 +2,7 @@ import React from 'react';
 import createRequest from '../../../reducers/request';
 
 
-export default class RegisterView extends React.Component{
+export default class LoginView extends React.Component{
 	
 	constructor(props){
 		super(props);
@@ -13,7 +13,7 @@ export default class RegisterView extends React.Component{
 
 	handleSubmit(event) {
 		let formData = this.state;
-		this.props.actions.createRequest('/register', {
+		this.props.actions.createRequest('/login', {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
@@ -38,29 +38,21 @@ export default class RegisterView extends React.Component{
 
 	render(){
 		let validation;
-		if(this.props.register.status==='ValidateErr'||this.props.register.status==='ServerErr'){
+		if(this.props.login.status==='ValidateErr'||this.props.login.status==='ServerErr'){
 			validation=(<div className="message">
-				 {this.props.register.message}
+				 {this.props.login.message}
 				</div>);
-		}else if(this.props.register.status==='Success'){
-			this.props.actions.push('/login');
+		}else if(this.props.login.status==='Success'){
+			this.props.actions.push('/');
 		}	
 		return (
 			<div className="setup-wrapper">
+				<div class="h2">Login</div>
 				{validation}
 				<form onSubmit={this.handleSubmit}>
 				  <div className="form-group">
-				    <label htmlFor="name">Nickname</label>
-				    <input type="text" name="name" className="form-control" value={this.state.name} onChange={this.handleChange} id="name" aria-describedby="nameHelp" placeholder="Enter nickname"/>
-				  </div>
-				  <div className="form-group">
 				    <label htmlFor="username">Username</label>
 				    <input type="text" name="username" className="form-control" value={this.state.username} onChange={this.handleChange} id="username" aria-describedby="usernameHelp" placeholder="Enter username" />
-				  </div>
-				  <div className="form-group">
-				    <label htmlFor="exampleInputEmail1">Email address</label>
-				    <input type="email" name="email" className="form-control" value={this.state.email} onChange={this.handleChange} id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-				    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
 				  </div>
 				  <div className="form-group">
 				    <label htmlFor="exampleInputPassword1">Password</label>

@@ -2,12 +2,22 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
+import {fetch_user_success,fetch_user_start,fetch_user__error} from '../reducers/UserReducer';
+import createRequest from '../reducers/request';
 
 class Header extends React.Component{
 	constructor(props){
 		super(props);
 		this.state={expanded:false};
 		this.handleClick=this.handleClick.bind(this);
+	}
+
+	componentWillMount(){
+		createRequest('/user/getUser',{},{
+			start:this.props.actions.fetch_user_start,
+			success:this.props.actions.fetch_user_success,
+			failed:this.props.actions.fetch_user_error
+		})
 	}
 
 	handleClick(event){
@@ -17,7 +27,7 @@ class Header extends React.Component{
 	handleRoute(path,event){
 		event.preventDefault();
 		console.log(this.props.actions);
-		this.props.push(path);
+		this.props.actions.push(path);
 	}
 
 	render(){
@@ -29,6 +39,15 @@ class Header extends React.Component{
 
 		let navbarProp = {
 			className:expanded?"collapse navbar-collapse show":"collapse navbar-collapse"
+		}
+		let loginInfo;
+		if(this.props.login.status==='IsLogin'){
+			loginInfo= (<a class="nav-link active" onClick={this.handleRoute.bind(this,'/account')} href="#">{this.props.login.user.name}</a>);
+		}else{
+			loginInfo=(<div className="btn-group" role="group" aria-label="Button group">
+		    	<button type="button" onClick={this.handleRoute.bind(this,'/login')} className="btn btn-primary">Login</button>
+		    	<button type="button" onClick={this.handleRoute.bind(this,'/register')} className="btn btn-outline-warning">Register</button>
+		    </div>);
 		}
 		return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -64,16 +83,22 @@ class Header extends React.Component{
 		      <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
 		      <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		    </form>
-		    <div className="btn-group" role="group" aria-label="Button group">
-		    	<button type="button" className="btn btn-primary">Login</button>
-		    	<button type="button" onClick={this.handleRoute.bind(this,'/register')} className="btn btn-outline-warning">Register</button>
-		    </div>
+		    {loginInfo}
 		  </div>
 		</nav>
 			);
 	}
 }
 
-export default connect(undefined,dispatch=>({
-	push:bindActionCreators(push,dispatch)
+const mapStateToProps = state=>({
+	login:state.login
+});
+
+export default connect(mapStateToProps, dispatch => ({
+	actions: bindActionCreators({
+		push: push,
+		fetch_user_success,
+		fetch_user_start,
+		fetch_user__error
+	}, dispatch)
 }))(Header);

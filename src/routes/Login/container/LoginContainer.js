@@ -1,12 +1,12 @@
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 import {bindActionCreators} from 'redux';
-import RegisterView from '../components/RegisterView';
+import LoginView from '../components/LoginView';
 import createRequest from '../../../reducers/request';
 import {submit_success,submit_start,submit_error} from '../../../reducers/SubmitReducer';
 
 const mapStateToProps = state=>({
-	register:state.register
+	login:state.login
 })
 
 const mapPropsToDispatch = dispatch => ({
@@ -19,4 +19,4 @@ const mapPropsToDispatch = dispatch => ({
 	}, dispatch)
 });
 
-export default connect(mapStateToProps,mapPropsToDispatch)(RegisterView);
+export default connect(mapStateToProps,mapPropsToDispatch)(LoginView);

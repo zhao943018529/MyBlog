@@ -39,4 +39,15 @@ UserSchema.virtual('id').get(function() {
 	return this._id;
 });
 
+UserSchema.statics = {
+	getUserByName: function(username, callback) {
+		return this.findOne({
+			username: username
+		}, callback);
+	},
+	getUserById: function(_id, cb) {
+		return this.findById(_id, cb);
+	}
+}
+
 module.exports=mongoose.model('User',UserSchema);

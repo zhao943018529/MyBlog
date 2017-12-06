@@ -6,14 +6,15 @@ const User = require('../models/User');
 
 router.post('/',function(req,res,next){
 	let data = req.body;
+	console.log(data);
 	let user = new User(data);
 	user.save(function(err,user){
 		let data={};
 		if(err){
-			data.status="validateErr";
+			data.status="ValidateErr";
 			data.message=err.message;
 		}else{
-			data.status="success";
+			data.status="Success";
 		}
 		res.end(JSON.stringify(data));
 	})

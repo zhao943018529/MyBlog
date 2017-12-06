@@ -1,14 +1,14 @@
 import { injectReducers } from '../../reducers/createReducers';
 
 export default (store) => ({
-	path: 'register',
+	path: 'login',
 	getComponent (nextState, cb) {
 		require.ensure([], (require) => {
-			const RegisterView = require('./container/RegisterContainer').default;
+			const LoginView = require('./container/LoginContainer').default;
 			const SubmitReducer = require('../../reducers/SubmitReducer').default;
-			let newReducer = injectReducers(store,[{key:'register',reducer:SubmitReducer}]);
+			let newReducer = injectReducers(store,[{key:'login',reducer:SubmitReducer}]);
 			store.reset(newReducer);
-			cb(null, RegisterView)
-		}, 'register')
+			cb(null, LoginView)
+		}, 'login')
 	}
 })

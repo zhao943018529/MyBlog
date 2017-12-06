@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 //webpack
 const webpack = require('webpack');
@@ -15,8 +16,12 @@ const config = require('./webpack.config.js');
 const db = require('./mongodb/db');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+var user = require('./routes/user');
 const register = require('./routes/register');
+const login = require('./routes/login');
+
+//middlewares
+var usermw = require('./middlewares/user');
 
 var app = express();
 
@@ -49,8 +54,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'dist')));
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 24 * 60000
+  }
+}));
 
+app.use(usermw);
+app.use('/user',user);
+app.use('/login',login);
 app.use('/register',register);
+
 
 app.get('*',function(req,res){
 	console.log(req.url);

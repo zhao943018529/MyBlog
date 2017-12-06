@@ -21,11 +21,11 @@ export default function createRequest(url,option,actions){
 			dispatch(actions.start());
 		}
 
-		fetch(url,option).then(checkStatus).then(parseJSON)
+		return fetch(url,option).then(checkStatus).then(parseJSON)
 		.then(function(data){
 			dispatch(actions.success(data));
 		}).catch(function(err){
-			dispatch(actions.faild(err));
+			dispatch(actions.failed(err));
 		});
 	}
 }
