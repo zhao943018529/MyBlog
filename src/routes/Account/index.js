@@ -2,6 +2,7 @@ import { injectReducers } from '../../reducers/createReducers';
 
 export default (store) => ({
 	path: 'account',
+	indexRoute:
 	getComponent (nextState, cb) {
 		require.ensure([], (require) => {
 			const AccountView = require('./container/AccountContainer').default;

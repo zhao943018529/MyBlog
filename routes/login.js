@@ -4,24 +4,24 @@ const User = require('../models/User');
 
 router.post('/', function(req, res, next) {
 
-	let data =req.data;
-	console.log(data);
+	let data =req.body;
 	User.getUserByName(data.username, function(err, user) {
 		if (err) next(err);
-		let data = {};
+		let message = {};
 		if (user) {
-			if (user.password === data.password) {
+			if (user.password == data.password) {
 				req.session.uid = user.id;
-				data.status = "Success";
+				message.status = "Success";
 			} else {
-				data.message = 'password is valid';
+				message.status = "ValidateErr";
+				message.message = 'password is valid';
 			}
 
 		} else {
-			data.message = 'username does not exist';
+			message.status = "ValidateErr";
+			message.message = 'username does not exist';
 		}
-		data.status = "ValidateErr";
-		res.end(JSON.stringify(data));
+		res.end(JSON.stringify(message));
 	});
 });
 

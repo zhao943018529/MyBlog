@@ -53,7 +53,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'dist')));
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -62,6 +61,7 @@ app.use(session({
     maxAge: 24 * 60000
   }
 }));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use(usermw);
 app.use('/user',user);

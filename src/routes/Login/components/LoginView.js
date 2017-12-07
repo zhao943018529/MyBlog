@@ -1,30 +1,33 @@
-import React from 'react';
-import createRequest from '../../../reducers/request';
+import React from "react";
+import createRequest from "../../../reducers/request";
 
-
-export default class LoginView extends React.Component{
-	
-	constructor(props){
+export default class LoginView extends React.Component {
+	constructor(props) {
 		super(props);
-		this.state={};
-		this.handleSubmit= this.handleSubmit.bind(this);
-		this.handleChange= this.handleChange.bind(this);
+		this.state = {};
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 	}
 
 	handleSubmit(event) {
 		let formData = this.state;
-		this.props.actions.createRequest('/login', {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
+		this.props.actions.createRequest(
+			"/login",
+			{
+				method: "POST",
+				credentials: 'same-origin',
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(formData)
 			},
-			body: JSON.stringify(formData)
-		}, {
-			start: this.props.actions.submit_start,
-			success: this.props.actions.submit_success,
-			failed: this.props.actions.submit_error
-		});
+			{
+				start: this.props.actions.submit_start,
+				success: this.props.actions.submit_success,
+				failed: this.props.actions.submit_error
+			}
+		);
 
 		event.preventDefault();
 	}
@@ -36,31 +39,53 @@ export default class LoginView extends React.Component{
 		this.setState(formData);
 	}
 
-	render(){
+	render() {
 		let validation;
-		if(this.props.login.status==='ValidateErr'||this.props.login.status==='ServerErr'){
-			validation=(<div className="message">
-				 {this.props.login.message}
-				</div>);
-		}else if(this.props.login.status==='Success'){
-			this.props.actions.push('/');
-		}	
+		if (
+			this.props.login.status === "ValidateErr" ||
+			this.props.login.status === "ServerErr"
+		) {
+			validation = (
+				<div className="message">{this.props.login.message}</div>
+			);
+		} else if (this.props.login.status === "Success") {
+			this.props.actions.push("/");
+		}
 		return (
 			<div className="setup-wrapper">
-				<div class="h2">Login</div>
+				<div className="h2">Login</div>
 				{validation}
 				<form onSubmit={this.handleSubmit}>
-				  <div className="form-group">
-				    <label htmlFor="username">Username</label>
-				    <input type="text" name="username" className="form-control" value={this.state.username} onChange={this.handleChange} id="username" aria-describedby="usernameHelp" placeholder="Enter username" />
-				  </div>
-				  <div className="form-group">
-				    <label htmlFor="exampleInputPassword1">Password</label>
-				    <input type="password" name="password" className="form-control" value={this.state.password} onChange={this.handleChange} id="exampleInputPassword1" placeholder="Password"/>
-				  </div>
-				  <button type="submit" className="btn btn-primary">Submit</button>
+					<div className="form-group">
+						<label htmlFor="username">Username</label>
+						<input
+							type="text"
+							name="username"
+							className="form-control"
+							value={this.state.username}
+							onChange={this.handleChange}
+							id="username"
+							aria-describedby="usernameHelp"
+							placeholder="Enter username"
+						/>
+					</div>
+					<div className="form-group">
+						<label htmlFor="exampleInputPassword1">Password</label>
+						<input
+							type="password"
+							name="password"
+							className="form-control"
+							value={this.state.password}
+							onChange={this.handleChange}
+							id="exampleInputPassword1"
+							placeholder="Password"
+						/>
+					</div>
+					<button type="submit" className="btn btn-primary">
+						Submit
+					</button>
 				</form>
-			</div>	
-			);
+			</div>
+		);
 	}
 }

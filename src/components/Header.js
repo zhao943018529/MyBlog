@@ -13,11 +13,13 @@ class Header extends React.Component{
 	}
 
 	componentWillMount(){
-		createRequest('/user/getUser',{},{
-			start:this.props.actions.fetch_user_start,
-			success:this.props.actions.fetch_user_success,
-			failed:this.props.actions.fetch_user_error
-		})
+		this.props.actions.createRequest('/user/getUser', {
+			credentials: 'same-origin'
+		}, {
+			start: this.props.actions.fetch_user_start,
+			success: this.props.actions.fetch_user_success,
+			failed: this.props.actions.fetch_user_error
+		});
 	}
 
 	handleClick(event){
@@ -99,6 +101,7 @@ export default connect(mapStateToProps, dispatch => ({
 		push: push,
 		fetch_user_success,
 		fetch_user_start,
-		fetch_user__error
+		fetch_user__error,
+		createRequest
 	}, dispatch)
 }))(Header);
