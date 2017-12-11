@@ -90,7 +90,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d53731b2ab7d68371f0f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e9e8ebf63077d8faefb8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -749,7 +749,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "js/" + ({"0":"register","1":"login","2":"account","3":"home","4":"404","5":"app"}[chunkId]||chunkId) + "." + {"0":"f07a13b4a9a99108d4ab","1":"3a8bf744d6e8e3f3307d","2":"a3a9ba810bd9303cf2fd","3":"b5195d767aba7afca66e","4":"d3dc40f360ac82b8161d","5":"bf5681457e7b9723c6b4"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "js/" + ({"0":"register","1":"login","2":"home","3":"addBlog","4":"404","5":"app"}[chunkId]||chunkId) + "." + {"0":"e488928bfd2bd9e30e78","1":"48c2505bf18f2c27f6d5","2":"25379fdb88943a02d402","3":"754a8ec28a837e0e5ccf","4":"9ea28afa63133a567c12","5":"8c0e76e5b57200c30b29"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {

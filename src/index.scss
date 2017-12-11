@@ -4,6 +4,17 @@
     margin: 0 auto;
 }
 
+.sidebar {
+    position: fixed;
+    top: 56px;
+    bottom: 0;
+    left: 0;
+    overflow-x: hidden;
+    z-index: 1000;
+    overflow-y: auto;
+    border-right: 1px solid #eee;
+}
+
 @import "node_modules/bootstrap/scss/functions";
 @import "node_modules/bootstrap/scss/variables";
 @import "node_modules/bootstrap/scss/mixins";

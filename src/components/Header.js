@@ -44,7 +44,7 @@ class Header extends React.Component{
 		}
 		let loginInfo;
 		if(this.props.login.status==='IsLogin'){
-			loginInfo= (<a class="nav-link active" onClick={this.handleRoute.bind(this,'/account')} href="#">{this.props.login.user.name}</a>);
+			loginInfo= (<a className="nav-link active" onClick={this.handleRoute.bind(this,'/account')} href="#">{this.props.login.user.name}</a>);
 		}else{
 			loginInfo=(<div className="btn-group" role="group" aria-label="Button group">
 		    	<button type="button" onClick={this.handleRoute.bind(this,'/login')} className="btn btn-primary">Login</button>
@@ -61,7 +61,7 @@ class Header extends React.Component{
 		  <div {...navbarProp} id="navbarSupportedContent">
 		    <ul className="navbar-nav mr-auto">
 		      <li className="nav-item active">
-		        <a className="nav-link" onClick={this.handleRoute.bind(this,'/home')} href="#">Home <span className="sr-only">(current)</span></a>
+		        <a className="nav-link" onClick={this.handleRoute.bind(this,'/')} href="#">Home <span className="sr-only">(current)</span></a>
 		      </li>
 		      <li className="nav-item">
 		        <a className="nav-link" href="#">Link</a>

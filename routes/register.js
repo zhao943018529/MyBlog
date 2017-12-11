@@ -18,7 +18,6 @@ router.post('/',function(req,res,next){
 		}
 		res.end(JSON.stringify(data));
 	})
-
-})
+});
 
 module.exports = router;

@@ -1,15 +1,12 @@
 import { injectReducers } from '../../reducers/createReducers';
+import  AddBlog from './routes/AddBlog';
+import AccountContainer from './container/AccountContainer';
 
 export default (store) => ({
 	path: 'account',
-	indexRoute:
-	getComponent (nextState, cb) {
-		require.ensure([], (require) => {
-			const AccountView = require('./container/AccountContainer').default;
-			const AccountReducer = require('../../reducers/AccountReducer').default;
-			let newReducer = injectReducers(store, [{ key: 'account', reducer: AccountReducer}]);
-			store.reset(newReducer);
-			cb(null, AccountView)
-		}, 'account')
-	}
-})
+	indexRoute:AddBlog(store),
+	component:AccountContainer,
+	childRoutes:[
+		AddBlog(store)
+	]
+});

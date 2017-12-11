@@ -2,9 +2,6 @@ import {connect} from 'react-redux';
 import AccountView from '../components/AccountView';
 import {push} from 'react-router-redux';
 import {bindActionCreators} from 'redux';
-const mapStateToProps = (state)=>({
-	account:state.account
-});
 
 const mapDispatchToProps = dispatch=>({
 	actions:bindActionCreators({
@@ -12,4 +9,4 @@ const mapDispatchToProps = dispatch=>({
 	},dispatch)
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(AccountView);
+export default connect(undefined,mapDispatchToProps)(AccountView);
