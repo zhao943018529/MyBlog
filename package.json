@@ -25,6 +25,7 @@
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "~4.15.5",
+    "file-loader": "^1.1.6",
     "morgan": "~1.9.0",
     "node-sass": "^4.7.2",
     "postcss-loader": "^2.0.9",

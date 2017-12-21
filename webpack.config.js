@@ -1,40 +1,42 @@
 const path = require('path');
-const HtmlWebpackPlugin= require("html-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require('webpack');
 
-module.exports={
+module.exports = {
 	context: __dirname,
-	devtool:'source-map',
-	entry:{
-		app:'./src/index'
+	devtool: 'source-map',
+	entry: {
+		app: './src/index'
 	},
-	output:{
-		publicPath:'/',
-		path:path.join(__dirname+'/dist'),
-		filename:'js/[name].[hash].js',
-		chunkFilename:'js/[name].[chunkhash].js'
+	output: {
+		publicPath: '/',
+		path: path.join(__dirname + '/dist'),
+		filename: 'js/[name].[hash].js',
+		chunkFilename: 'js/[name].[chunkhash].js'
 	},
-	module:{
-		rules:[
-			{
-				test:/\.js$/,
-				exclude:/node_modules/,
-				use:{
-					loader:'babel-loader',
-					query:{
-						presets:[['env',{ "modules": false }],'react','stage-0'],
-						plugins: ['transform-runtime']
-					}
+	module: {
+		rules: [{
+			test: /\.js$/,
+			exclude: /node_modules/,
+			use: {
+				loader: 'babel-loader',
+				query: {
+					presets: [
+						['env', {
+							"modules": false
+						}], 'react', 'stage-0'
+					],
+					plugins: ['transform-runtime']
 				}
-			},
-		{
+			}
+		}, {
 			test: /\.(sass|scss|less)$/,
 			use: [{
 				loader: "style-loader"
 			}, {
 				loader: "css-loader"
 			}, {
-				loader:'postcss-loader',
+				loader: 'postcss-loader',
 				options: {
 					plugins: function() {
 						return [
@@ -43,11 +45,24 @@ module.exports={
 						];
 					}
 				}
-			},{
+			}, {
 				loader: "sass-loader"
 			}]
+		}, {
+			test: /.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+			use: [{
+				loader: 'file-loader',
+				options: {
+					name: '[name].[ext]',
+					outputPath: 'css/fonts/'
+				}
+			}]
+		}]
+	},
+	resolve:{
+		alias:{
+			root:path.resolve(__dirname,'src')
 		}
-		]
 	},
 	plugins: [
 		new webpack.optimize.CommonsChunkPlugin({
@@ -62,8 +77,8 @@ module.exports={
 		}),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.ProvidePlugin({
-			$:'jquery',
-			jQuery:'jquery'
+			$: 'jquery',
+			jQuery: 'jquery'
 		})
 	],
 	devServer: {
@@ -71,8 +86,7 @@ module.exports={
 		port: 3000,
 		inline: true,
 		hot: true,
-		publicPath:'dist',
+		publicPath: 'dist',
 		historyApiFallback: true
 	}
-
 }

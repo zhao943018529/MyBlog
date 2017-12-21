@@ -7,7 +7,7 @@ import createStore from './store/createStore';
 import routes from './routes';
 
 //import bootstrap scss
-require('./index.scss');
+require('./styles/index.scss');
 
 const store = createStore();
 const history = syncHistoryWithStore(browserHistory, store)
