@@ -5,6 +5,7 @@ import PageNotFound from './PageNotFound';
 import redirect from './PageNotFound/redirect';
 import Register from './Register';
 import Login from './Login';
+
 export const createRoutes = (store)=>({
 	path:'/',
 	component:Layout,

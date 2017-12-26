@@ -12,6 +12,19 @@ class Header extends React.Component{
 		this.handleClick=this.handleClick.bind(this);
 	}
 
+	componentWillReceiveProps(nextProps){
+		console.log(this.props.location);
+		if(this.props.location.pathname!==nextProps.location.pathname){
+			this.props.actions.createRequest('/user/getUser', {
+				credentials: 'same-origin'
+			}, {
+				start: this.props.actions.fetch_user_start,
+				success: this.props.actions.fetch_user_success,
+				failed: this.props.actions.fetch_user_error
+			});
+		}
+	}
+
 	componentWillMount(){
 		this.props.actions.createRequest('/user/getUser', {
 			credentials: 'same-origin'

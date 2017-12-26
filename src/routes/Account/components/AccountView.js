@@ -3,6 +3,12 @@ import React from 'react';
 
 export default class AccountView extends React.Component{
 
+	componentWillMount(){
+		if(this.props.login.status!=="IsLogin"){
+			this.props.actions.push("/login");
+		}
+	}
+
 	handleClick(path,event){
 		event.preventDefault();
 		this.props.actions.push(path);
