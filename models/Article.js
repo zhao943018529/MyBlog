@@ -9,7 +9,7 @@ const articleSchema = new Schema({
 	},
 	tags: [{
 		type: Schema.Types.ObjectId,
-		ref: 'tag'
+		ref: 'Tag'
 	}],
 	createTime: {
 		type: Date

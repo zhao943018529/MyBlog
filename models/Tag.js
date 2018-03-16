@@ -8,4 +8,4 @@ const tagSchema = new Schema({
 
 tagSchema.set('toJSON', { getters: true, virtuals: true});
 tagSchema.set('toObject', { getters: true, virtuals: true});
-module.exports = mongoose.model('tag', tagSchema);
+module.exports = mongoose.model('Tag', tagSchema);
