@@ -63,6 +63,22 @@ $fa-font-path:"./fonts";
         font-family: 'Georgia', serif;
         font-size: 14px;
         padding: 15px;
+
+            pre{
+                white-space: pre-wrap;
+                margin-bottom: 5px;
+                margin-top: 5px;
+                padding: 5px 10px;
+                border-radius: 3px;
+                color: #f8f8f2;
+
+                &.ql-syntax{
+                    padding: 0px;
+                        .hljs-comment{
+                          color:#75715e;
+                        }
+                }
+        }
     }   
     
     .RichEditor-editor {
@@ -82,10 +98,9 @@ $fa-font-path:"./fonts";
     }
 
     .RichEditor-editor .public-DraftStyleDefault-pre {
-        background-color: rgba(0, 0, 0, 0.05);
-        font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
-        font-size: 16px;
-        padding: 20px;
+        fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace';
+        background-color: #23241f;
+        overflow: visible;
     }
 
     .link-panel{
@@ -126,3 +141,4 @@ $fa-font-path:"./fonts";
         position: absolute;
         z-index: -1;
     }
+

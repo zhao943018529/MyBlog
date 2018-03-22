@@ -5,6 +5,8 @@ import BlockStyleControl from './components/BlockStyleControl';
 import CustomStyleControl from './components/CustomStyleControl';
 import LinkComponent from './components/LinkComponent';
 import LinkStrategy from './modify/LinkStrategy';
+import AnnotationComponent from './components/AnnotationComponent';
+import AnnotationStrategy from './modify/AnnotationStrategy';
 import mediaBlockRenderer from './modify/MediaBlockRenderer';
 import myBlockStyleFn from './modify/myBlockStyleFn';
 
@@ -15,7 +17,10 @@ export default class MyDraft extends React.Component{
 		const decorator = new CompositeDecorator([{
 			strategy:LinkStrategy,
 			component:LinkComponent
-		}])
+		},{
+			strategy:AnnotationStrategy,
+			component:AnnotationComponent
+		}]);
 		this.state = {
 			editorState: EditorState.createEmpty(decorator),
 			showURLInput: false,
@@ -186,9 +191,9 @@ export default class MyDraft extends React.Component{
 
 const styleMap = {
   CODE: {
-    backgroundColor: 'rgba(0, 0, 0, 0.05)',
     fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
-    fontSize: 16,
-    padding: 2,
+    backgroundColor: '#23241f',
+    color: '#f8f8f2',
+    overflow: 'visible',
   },
 };

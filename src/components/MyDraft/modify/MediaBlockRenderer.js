@@ -7,5 +7,6 @@ export default function mediaBlockRenderer(block){
 			editable:false,
 		}
 	}
+
 	return null;
 }

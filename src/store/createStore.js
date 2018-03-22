@@ -40,6 +40,7 @@ export default (initialState) => {
 		home: HomeReducer
 	}),initialState);
 	store.asyncReducers = {};
+	
 	return store;
 }
 
