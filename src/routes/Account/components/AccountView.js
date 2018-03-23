@@ -23,6 +23,11 @@ export default class AccountView extends React.Component{
 									新增博客
 								</a>
 							</li>
+							<li className="nav-item">
+								<a className="nav-link active" onClick={this.handleClick.bind(this,'/account/addTag')} href="#">
+									Add Tag
+								</a>
+							</li>
 						</ul>
 					</nav>
 					<main className="col-10 pt-3 ml-sm-auto">

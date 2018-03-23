@@ -1,5 +1,6 @@
 import { injectReducers } from '../../reducers/createReducers';
  import  AddBlog from './routes/AddBlog';
+  import  ManageTag from './routes/ManageTag';
 // import AccountContainer from './container/AccountContainer';
 
 // export default (store) => ({
@@ -14,7 +15,8 @@ import { injectReducers } from '../../reducers/createReducers';
 export default (store) => ({
 	path: 'account',
 	childRoutes: [
-		AddBlog(store)
+		AddBlog(store),
+		ManageTag(store)
 	],
 	getComponent (nextState, cb) {
 		require.ensure([], (require) => {
