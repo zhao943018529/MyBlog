@@ -5,7 +5,7 @@ import UserReducer from './UserReducer';
 export default function makeRootReducer(asyncReducers) {
 	return combineReducers({
 		routing: routerReducer,
-		login: UserReducer,
+		user: UserReducer,
 		...asyncReducers
 	});
 }

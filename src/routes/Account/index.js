@@ -21,8 +21,8 @@ export default (store) => ({
 	getComponent (nextState, cb) {
 		require.ensure([], (require) => {
 			const AccountContainer = require('./container/AccountContainer').default;
-			let newReducer = injectReducers(store);
-			store.reset(newReducer);
+			// let newReducer = injectReducers(store);
+			// store.reset(newReducer);
 			cb(null, AccountContainer)
 		}, 'account')
 	}

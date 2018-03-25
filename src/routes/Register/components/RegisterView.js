@@ -38,7 +38,7 @@ export default class RegisterView extends React.Component{
 
 	render(){
 		let validation;
-		if(this.props.register.status==='ValidateErr'||this.props.register.status==='ServerErr'){
+		if(this.props.register.status==='Failed'){
 			validation=(<div className="message">
 				 {this.props.register.message}
 				</div>);
@@ -66,7 +66,7 @@ export default class RegisterView extends React.Component{
 				    <label htmlFor="exampleInputPassword1">Password</label>
 				    <input type="password" name="password" className="form-control" value={this.state.password} onChange={this.handleChange} id="exampleInputPassword1" placeholder="Password"/>
 				  </div>
-				  <button type="submit" className="btn btn-primary">Submit</button>
+				  <button type="submit" disabled={this.props.register.status==='Requesting'} className="btn btn-primary">Submit</button>
 				</form>
 			</div>	
 			);

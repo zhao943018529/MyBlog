@@ -6,7 +6,8 @@ import createRequest from '../../../reducers/request';
 import {submit_success,submit_start,submit_error} from '../../../reducers/SubmitReducer';
 
 const mapStateToProps = state=>({
-	login:state.login
+	login:state.login,
+	user:state.user
 })
 
 const mapPropsToDispatch = dispatch => ({

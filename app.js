@@ -19,6 +19,7 @@ var index = require('./routes/index');
 var user = require('./routes/user');
 const register = require('./routes/register');
 const login = require('./routes/login');
+const account = require('./routes/account');
 
 //middlewares
 var usermw = require('./middlewares/user');
@@ -65,6 +66,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use(usermw);
 app.use('/user',user);
+app.use('/account',account);
 app.use('/login',login);
 app.use('/register',register);
 

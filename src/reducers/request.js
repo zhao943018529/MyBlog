@@ -23,7 +23,11 @@ export default function createRequest(url,option,actions){
 
 		return fetch(url,option).then(checkStatus).then(parseJSON)
 		.then(function(data){
-			dispatch(actions.success(data));
+			if(data.status>300&&data.status<400){
+				throw new Error(data.message);
+			}else{
+				dispatch(actions.success(data));
+			}
 		}).catch(function(err){
 			dispatch(actions.failed(err));
 		});

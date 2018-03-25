@@ -1,5 +1,5 @@
 let initialState={
-	status:'Register',
+	status:'',
 	message:''	
 };
 
@@ -13,16 +13,15 @@ export default function(state=initialState,action){
 	switch(action.type){
 		case 'SUBMIT_SUCCESS':
 			return {
-				status:action.payload.status,
-				message:action.payload.message
+				status:'Success',
 			};
 		case 'SUBMIT_START':
 			return {
-				status:'REGISTING'
+				status:'Requesting'
 			};
 		case 'SUBMIT_ERROR':
 				return {
-					status:'ServerErr',
+					status:'Failed',
 					message:action.error
 				};
 			default:

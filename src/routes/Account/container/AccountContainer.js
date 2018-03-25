@@ -4,7 +4,7 @@ import {push} from 'react-router-redux';
 import {bindActionCreators} from 'redux';
 
 const mapStateToProps = state=>({
-	login:state.login
+	user:state.user
 })
 
 const mapDispatchToProps = dispatch=>({

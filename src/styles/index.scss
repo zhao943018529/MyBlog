@@ -142,3 +142,23 @@ $fa-font-path:"./fonts";
         z-index: -1;
     }
 
+    .border-bottom{
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .tag-container{
+        position: relative;
+
+        .add-tag-button{
+            position:absolute;
+            right: 60px;
+            bottom: -550px;
+            color:#ea214e;
+            line-height: 80px;
+            z-index: 9999;
+            font:{
+                size:80px;
+
+            }
+        }
+    }

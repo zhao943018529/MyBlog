@@ -9,6 +9,18 @@ export default class LoginView extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 	}
 
+	componentWillMount(){
+		if (this.props.user.status === "Success") {
+			this.props.actions.push("/account");
+		}
+	}
+
+	componentDidUpdate(){
+		if (this.props.login.status === "Success") {
+			this.props.actions.push("/");
+		}
+	}
+
 	handleSubmit(event) {
 		let formData = this.state;
 		this.props.actions.createRequest(
@@ -42,15 +54,12 @@ export default class LoginView extends React.Component {
 	render() {
 		let validation;
 		if (
-			this.props.login.status === "ValidateErr" ||
-			this.props.login.status === "ServerErr"
-		) {
+			this.props.login.status === 'Failed') {
 			validation = (
 				<div className="message">{this.props.login.message}</div>
 			);
-		} else if (this.props.login.status === "Success") {
-			this.props.actions.push("/");
 		}
+
 		return (
 			<div className="setup-wrapper">
 				<div className="h2">Login</div>
@@ -81,7 +90,7 @@ export default class LoginView extends React.Component {
 							placeholder="Password"
 						/>
 					</div>
-					<button type="submit" className="btn btn-primary">
+					<button type="submit" disabled={this.props.login.status==='Requesting'} className="btn btn-primary">
 						Submit
 					</button>
 				</form>

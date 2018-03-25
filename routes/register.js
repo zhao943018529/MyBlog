@@ -11,10 +11,10 @@ router.post('/',function(req,res,next){
 	user.save(function(err,user){
 		let data={};
 		if(err){
-			data.status="ValidateErr";
+			data.status=310;
 			data.message=err.message;
 		}else{
-			data.status="Success";
+			data.status=200;
 		}
 		res.end(JSON.stringify(data));
 	})

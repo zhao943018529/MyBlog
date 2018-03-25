@@ -11,14 +11,14 @@ router.post('/', function(req, res, next) {
 		if (user) {
 			if (user.password == data.password) {
 				req.session.uid = user.id;
-				message.status = "Success";
+				message.status = "200";
 			} else {
-				message.status = "ValidateErr";
+				message.status = "310";
 				message.message = 'password is valid';
 			}
 
 		} else {
-			message.status = "ValidateErr";
+			message.status = "310";
 			message.message = 'username does not exist';
 		}
 		res.end(JSON.stringify(message));

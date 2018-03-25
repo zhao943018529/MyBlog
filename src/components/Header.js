@@ -2,7 +2,7 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
-import {fetch_user_success,fetch_user_start,fetch_user__error} from '../reducers/UserReducer';
+import {fetch_user_success,fetch_user_start,fetch_user_error}  from '../reducers/UserReducer';
 import createRequest from '../reducers/request';
 
 class Header extends React.Component{
@@ -56,8 +56,8 @@ class Header extends React.Component{
 			className:expanded?"collapse navbar-collapse show":"collapse navbar-collapse"
 		}
 		let loginInfo;
-		if(this.props.login.status==='IsLogin'){
-			loginInfo= (<a className="nav-link active" onClick={this.handleRoute.bind(this,'/account')} href="#">{this.props.login.user.name}</a>);
+		if(this.props.user.status==='Success'){
+			loginInfo= (<a className="nav-link active" onClick={this.handleRoute.bind(this,'/account')} href="#">{this.props.user.user.name}</a>);
 		}else{
 			loginInfo=(<div className="btn-group" role="group" aria-label="Button group">
 		    	<button type="button" onClick={this.handleRoute.bind(this,'/login')} className="btn btn-primary">Login</button>
@@ -106,7 +106,7 @@ class Header extends React.Component{
 }
 
 const mapStateToProps = state=>({
-	login:state.login
+	user:state.user
 });
 
 export default connect(mapStateToProps, dispatch => ({
@@ -114,7 +114,7 @@ export default connect(mapStateToProps, dispatch => ({
 		push: push,
 		fetch_user_success,
 		fetch_user_start,
-		fetch_user__error,
+		fetch_user_error,
 		createRequest
 	}, dispatch)
 }))(Header);

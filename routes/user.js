@@ -10,12 +10,12 @@ router.get('/getUser',function(req,res,next){
 	let data;
 	if (req.user) {
 		data = {
-			status: 'IsLogin',
+			status: 200,
 			user: req.user
 		};
 	} else {
 		data = {
-			status:'NoLogin'
+			status:310
 		};
 	}
 	res.end(JSON.stringify(data));
