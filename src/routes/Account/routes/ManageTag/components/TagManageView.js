@@ -64,7 +64,7 @@ export default class TagManageView extends React.Component{
 			ref:element=>{
 				this.model=element;
 			},
-			style:{display:'block'},
+			style:{display:isExpanded?'block':'none'},
 			onClick:event=>this.handleClickCovered(event)
 		};
 		
@@ -168,7 +168,7 @@ export default class TagManageView extends React.Component{
 		let covert = this.state.isExpanded?this.createCovert():undefined;
 
 		return (
-				<div className={"tag-container "+(this.state.isExpanded&&"modal-open")}>
+				<div className={"tag-container "+(this.state.isExpanded&&"modal-open":"")}>
 					<div className="d-flex pb-2 mb-3 border-bottom">
 						<h1 className="h2">Tag Management</h1>
 					</div>	

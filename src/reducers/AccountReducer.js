@@ -1,4 +1,4 @@
-let initialState = {
+export const initialState = {
 	user:{
 		id:'qwe123',
 		nickname:'Ninja',

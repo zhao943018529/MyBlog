@@ -9,7 +9,7 @@ const RESET='@RESET';
 
 const resetReducerCreator =(reducer,resetState)=>(state,action)=>{
 	if(action.type===RESET){
-		return resetState || state;
+		return resetState;
 	}else{
 		return reducer(state,action);
 	}

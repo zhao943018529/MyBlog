@@ -3,8 +3,8 @@ import React from 'react';
 
 export default class AccountView extends React.Component{
 
-	componentWillMount(){
-		if(this.props.user.status!=="Success"){
+	componentDidMount(){
+		if(this.props.user.status!=="Success"&&this.props.user.status!=='Requesting'){
 			this.props.actions.push("/login");
 		}
 	}
@@ -22,7 +22,7 @@ export default class AccountView extends React.Component{
 						<ul className="nav nav-pills flex-column">
 							<li className="nav-item">
 								<a className={"nav-link "+(pathname=='/addBlog'&&'active')} onClick={this.handleClick.bind(this,'/account/addBlog')} href="#">
-									新增博客
+									Add Blog
 								</a>
 							</li>
 							<li className="nav-item">

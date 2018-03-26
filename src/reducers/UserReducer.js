@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
 	status:'NoLogin'
 };
 
@@ -8,6 +8,11 @@ export const fetch_user_error = (err)=>({type:'FETCH_USER_ERROR',error:err.messa
 
 export default function(state = initialState, action) {
 	switch (action.type) {
+		case 'FETCH_USER_START':
+			return {
+				...state,
+				status:'Requesting'
+			}; 
 		case 'FETCH_USER_SUCCESS':
 			return {
 				status: 'Success',

@@ -1,4 +1,4 @@
-let initialState = {
+export const initialState = {
 	articles: [{
 		id: '1111',
 		title: 'aaaa',

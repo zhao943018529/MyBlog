@@ -5,10 +5,11 @@ export default (store) => ({
 	getComponent (nextState, cb) {
 		require.ensure([], (require) => {
 			const TagManageView = require('./container/TagManageContainer').default;
-			const TagReducer = require('../../../../reducers/TagReducer').default;
-			let newReducer = injectReducers(store,[{key:'tag',reducer:TagReducer}]);
-			store.reset(newReducer);
-			cb(null, TagManageView)
+			const TagModule = require('../../../../reducers/TagReducer');
+			let newReducer = injectReducers(store,[{key:'tag',reducer:TagModule.default}]);
+			let preState = store.getState();
+			store.reset(newReducer,{...preState,tag:TagModule.initialState});
+			cb(null, TagManageView);
 		}, 'optTag')
 	}
 });

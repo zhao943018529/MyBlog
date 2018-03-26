@@ -5,9 +5,10 @@ export default (store) => ({
 	getComponent (nextState, cb) {
 		require.ensure([], (require) => {
 			const RegisterView = require('./container/RegisterContainer').default;
-			const SubmitReducer = require('../../reducers/SubmitReducer').default;
-			let newReducer = injectReducers(store,[{key:'register',reducer:SubmitReducer}]);
-			store.reset(newReducer);
+			const SubmitModule = require('../../reducers/SubmitReducer');
+			let newReducer = injectReducers(store,[{key:'register',reducer:SubmitModule.default}]);
+			let preState = store.getState();
+			store.reset(newReducer,{...preState,home:SubmitModule.initialState});
 			cb(null, RegisterView)
 		}, 'register')
 	}

@@ -10,8 +10,6 @@ export default function makeRootReducer(asyncReducers) {
 	});
 }
 
-
-
 export const injectReducers = (store, reducers) => {
 	store.asyncReducers={};
 	if (reducers) {

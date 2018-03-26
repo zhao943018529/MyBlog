@@ -1,4 +1,4 @@
-let initialState={
+export const initialState={
 	status:'',
 	message:''	
 };

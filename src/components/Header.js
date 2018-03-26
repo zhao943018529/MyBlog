@@ -12,7 +12,7 @@ class Header extends React.Component{
 		this.handleClick=this.handleClick.bind(this);
 	}
 
-	componentWillReceiveProps(nextProps){
+	componentWillUpdate(nextProps,preState){
 		console.log(this.props.location);
 		if(this.props.location.pathname!==nextProps.location.pathname){
 			this.props.actions.createRequest('/user/getUser', {
@@ -22,6 +22,10 @@ class Header extends React.Component{
 				success: this.props.actions.fetch_user_success,
 				failed: this.props.actions.fetch_user_error
 			});
+		}
+
+		if(nextProps.user.status!=='Success'&&nextProps.user.status!=='Requesting'&&nextProps.location.pathname!=='/login'){
+			this.props.actions.push('/login');
 		}
 	}
 
