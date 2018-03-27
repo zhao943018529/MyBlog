@@ -6,7 +6,6 @@ import createRequest from "../../../reducers/request";
 
 const mapStateToProps = state=>({
 	login:state.login,
-	user:state.user
 })
 
 const mapPropsToDispatch = {

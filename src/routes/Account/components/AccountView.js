@@ -3,12 +3,6 @@ import React from 'react';
 
 export default class AccountView extends React.Component{
 
-	componentDidMount(){
-		if(this.props.user.status!=="Success"&&this.props.user.status!=='Requesting'){
-			this.props.push("/login");
-		}
-	}
-
 	handleClick(path,event){
 		event.preventDefault();
 		this.props.push(path);

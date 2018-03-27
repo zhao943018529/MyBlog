@@ -15,7 +15,7 @@ export default function(state=initialState,action){
 		case 'ADD_TAG_SUCCESS':
 			return {
 				...state,
-				status:'Success',
+				status:'ADD_TAG_SUCCESS',
 			};
 		case 'ADD_TAG_FAILED':
 			return {
@@ -26,8 +26,8 @@ export default function(state=initialState,action){
 		case 'FETCH_TAGS_SUCCESS':
 			return {
 				...state,
-				status: action.payload.status,
-				tags: action.payload.tags
+				status: 'FETCH_TAGS_SUCCESS',
+				tags: action.payload
 			};
 		case 'FETCH_TAGS_FAILED':
 			return {

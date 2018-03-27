@@ -10,14 +10,8 @@ export default class LoginView extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 	}
 
-	componentWillMount(){
-		if (this.props.user.status === "Success") {
-			this.props.push("/account");
-		}
-	}
-
-	componentDidUpdate(){
-		if (this.props.login.status === "Success") {
+	componentWillUpdate(nextProps, nextState){
+		if (nextProps.login.status === "Success") {
 			this.props.push("/");
 		}
 	}

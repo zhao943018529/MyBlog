@@ -26,7 +26,7 @@ export function requrestData(url,option,callbacks){
 			if(data.status>300&&data.status<400){
 				throw new Error(data.message);
 			}else{
-				callbacks[0](data);
+				callbacks[0](data.data);
 			}
 	}).catch(err=>{
 		callbacks[1](err);
@@ -44,7 +44,7 @@ export default function createRequest(url,option,actions){
 			if(data.status>300&&data.status<400){
 				throw new Error(data.message);
 			}else{
-				dispatch(actions.success(data));
+				dispatch(actions.success(data.data));
 			}
 		}).catch(function(err){
 			dispatch(actions.failed(err));

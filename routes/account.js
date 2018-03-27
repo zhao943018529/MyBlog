@@ -11,7 +11,7 @@ router.get('/optTag/getTags',function(req,res,next){
 			data.message=err.message;
 		}else{
 			data.status=200;
-			data.tags=tags;
+			data.data=tags;
 		}
 		res.end(JSON.stringify(data));
 	});

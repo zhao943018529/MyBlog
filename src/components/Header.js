@@ -28,9 +28,9 @@ class Header extends React.Component{
 			this.props.push('/login');
 		}
 
-		// if(nextProps.location.pathname==='/login'&&nextProps.user.status==='Success'){
-		// 	this.props.push('/');
-		// }
+		if(nextProps.location.pathname==='/login'&&nextProps.user.status==='Success'){
+			this.props.push('/');
+		}
 	}
 
 	componentWillMount(){
