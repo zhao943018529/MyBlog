@@ -15,27 +15,31 @@ class Header extends React.Component{
 	componentWillUpdate(nextProps,preState){
 		console.log(this.props.location);
 		if(this.props.location.pathname!==nextProps.location.pathname){
-			this.props.actions.createRequest('/user/getUser', {
+			this.props.createRequest('/user/getUser', {
 				credentials: 'same-origin'
 			}, {
-				start: this.props.actions.fetch_user_start,
-				success: this.props.actions.fetch_user_success,
-				failed: this.props.actions.fetch_user_error
+				start: fetch_user_start,
+				success: fetch_user_success,
+				failed: fetch_user_error
 			});
 		}
 
 		if(/\/account/.test(nextProps.location.pathname)&&nextProps.user.status!=='Success'&&nextProps.user.status!=='Requesting'){
-			this.props.actions.push('/login');
+			this.props.push('/login');
 		}
+
+		// if(nextProps.location.pathname==='/login'&&nextProps.user.status==='Success'){
+		// 	this.props.push('/');
+		// }
 	}
 
 	componentWillMount(){
-		this.props.actions.createRequest('/user/getUser', {
+		this.props.createRequest('/user/getUser', {
 			credentials: 'same-origin'
 		}, {
-			start: this.props.actions.fetch_user_start,
-			success: this.props.actions.fetch_user_success,
-			failed: this.props.actions.fetch_user_error
+			start: fetch_user_start,
+			success: fetch_user_success,
+			failed: fetch_user_error
 		});
 	}
 
@@ -45,8 +49,8 @@ class Header extends React.Component{
 
 	handleRoute(path,event){
 		event.preventDefault();
-		console.log(this.props.actions);
-		this.props.actions.push(path);
+		console.log(this.props);
+		this.props.push(path);
 	}
 
 	render(){
@@ -113,12 +117,7 @@ const mapStateToProps = state=>({
 	user:state.user
 });
 
-export default connect(mapStateToProps, dispatch => ({
-	actions: bindActionCreators({
+export default connect(mapStateToProps, {
 		push: push,
-		fetch_user_success,
-		fetch_user_start,
-		fetch_user_error,
 		createRequest
-	}, dispatch)
-}))(Header);
+	})(Header);

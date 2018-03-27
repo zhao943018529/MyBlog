@@ -1,4 +1,9 @@
 import React from 'react';
+import {fetch_tags_success,
+	fetch_tags_start,
+	fetch_tags_error,
+	add_tag_success,
+	add_tag_error} from '../../../../../reducers/TagReducer';
 
 
 export default class TagManageView extends React.Component{
@@ -13,12 +18,12 @@ export default class TagManageView extends React.Component{
 	}
 	
 	componentDidMount(){
-	    this.props.actions.createRequest('/account/optTag/getTags', {
+	    this.props.createRequest('/account/optTag/getTags', {
 			credentials: 'same-origin'
 			}, {
-				start: this.props.actions.fetch_tags_start,
-				success: this.props.actions.fetch_tags_success,
-				failed: this.props.actions.fetch_tags_error
+				start: fetch_tags_start,
+				success: fetch_tags_success,
+				failed: fetch_tags_error
 			});
 	}
 
@@ -119,7 +124,7 @@ export default class TagManageView extends React.Component{
 		}
 
 		if(tagValue.length>0){
-			this.props.actions.createRequest(url,
+			this.props.createRequest(url,
 				{
 					method: 'POST',
 					headers: {
@@ -129,8 +134,8 @@ export default class TagManageView extends React.Component{
 					body:JSON.stringify(data)
 				},
 				{
-					success:this.props.actions.add_tag_success,
-					failed:this.props.actions.add_tag_error
+					success:add_tag_success,
+					failed:add_tag_error
 				});
 		}else{
 			myForm.classList.add('was-validated');

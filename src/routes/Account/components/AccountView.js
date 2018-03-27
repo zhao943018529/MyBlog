@@ -5,13 +5,13 @@ export default class AccountView extends React.Component{
 
 	componentDidMount(){
 		if(this.props.user.status!=="Success"&&this.props.user.status!=='Requesting'){
-			this.props.actions.push("/login");
+			this.props.push("/login");
 		}
 	}
 
 	handleClick(path,event){
 		event.preventDefault();
-		this.props.actions.push(path);
+		this.props.push(path);
 	}
 
 	render(){

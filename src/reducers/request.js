@@ -15,6 +15,24 @@ function parseJSON(response) {
   return response.json()
 }
 
+
+
+export function requrestData(url,option,callbacks){
+	if(callbacks&&callbacks.length===3){
+		callbacks.splice(0,1)[0]();
+	}
+	
+	fetch(url,option).then(checkStatus).then(parseJSON).then((data)=>{
+			if(data.status>300&&data.status<400){
+				throw new Error(data.message);
+			}else{
+				callbacks[0](data);
+			}
+	}).catch(err=>{
+		callbacks[1](err);
+	});
+}
+
 export default function createRequest(url,option,actions){
 	return dispatch =>{
 		if(actions.start){

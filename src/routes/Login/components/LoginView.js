@@ -1,29 +1,30 @@
 import React from "react";
-import createRequest from "../../../reducers/request";
+//import createRequest from "../../../reducers/request";
+import {submit_success,submit_start,submit_error} from '../../../reducers/SubmitReducer';
 
 export default class LoginView extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {fomData:{}};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
 
 	componentWillMount(){
 		if (this.props.user.status === "Success") {
-			this.props.actions.push("/account");
+			this.props.push("/account");
 		}
 	}
 
-	componentWillUpdate(nextProps){
-		if (nextProps.login.status === "Success") {
-			nextProps.actions.push("/");
+	componentDidUpdate(){
+		if (this.props.login.status === "Success") {
+			this.props.push("/");
 		}
 	}
 
 	handleSubmit(event) {
-		let formData = this.state;
-		this.props.actions.createRequest(
+		let formData = this.state.formData;
+		this.props.createRequest(
 			"/login",
 			{
 				method: "POST",
@@ -35,9 +36,9 @@ export default class LoginView extends React.Component {
 				body: JSON.stringify(formData)
 			},
 			{
-				start: this.props.actions.submit_start,
-				success: this.props.actions.submit_success,
-				failed: this.props.actions.submit_error
+				start: submit_start,
+				success: submit_success,
+				failed: submit_error
 			}
 		);
 
@@ -46,15 +47,14 @@ export default class LoginView extends React.Component {
 
 	handleChange(event) {
 		let target = event.target;
-		let formData = this.state || {};
+		let formData = this.state.formData || {};
 		formData[target.name] = target.value;
-		this.setState(formData);
+		this.setState({formData:formData});
 	}
 
 	render() {
 		let validation;
-		if (
-			this.props.login.status === 'Failed') {
+		if (this.props.login.status === 'Failed') {
 			validation = (
 				<div className="message">{this.props.login.message}</div>
 			);

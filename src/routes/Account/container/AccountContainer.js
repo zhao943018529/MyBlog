@@ -7,10 +7,8 @@ const mapStateToProps = state=>({
 	user:state.user
 })
 
-const mapDispatchToProps = dispatch=>({
-	actions:bindActionCreators({
+const mapDispatchToProps = {
 		push:push
-	},dispatch)
-});
+	};
 
 export default connect(mapStateToProps,mapDispatchToProps)(AccountView);

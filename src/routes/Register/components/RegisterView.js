@@ -1,6 +1,6 @@
 import React from 'react';
 import createRequest from '../../../reducers/request';
-
+import {submit_success,submit_start,submit_error} from '../../../reducers/SubmitReducer';
 
 export default class RegisterView extends React.Component{
 	
@@ -13,7 +13,7 @@ export default class RegisterView extends React.Component{
 
 	handleSubmit(event) {
 		let formData = this.state;
-		this.props.actions.createRequest('/register', {
+		this.props.createRequest('/register', {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
@@ -21,9 +21,9 @@ export default class RegisterView extends React.Component{
 			},
 			body: JSON.stringify(formData)
 		}, {
-			start: this.props.actions.submit_start,
-			success: this.props.actions.submit_success,
-			failed: this.props.actions.submit_error
+			start: submit_start,
+			success: submit_success,
+			failed: submit_error
 		});
 
 		event.preventDefault();
@@ -43,7 +43,7 @@ export default class RegisterView extends React.Component{
 				 {this.props.register.message}
 				</div>);
 		}else if(this.props.register.status==='Success'){
-			this.props.actions.push('/login');
+			this.props.push('/login');
 		}	
 		return (
 			<div className="setup-wrapper">
