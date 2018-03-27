@@ -24,7 +24,7 @@ class Header extends React.Component{
 			});
 		}
 
-		if(nextProps.user.status!=='Success'&&nextProps.user.status!=='Requesting'&&nextProps.location.pathname!=='/login'){
+		if(/\/account/.test(nextProps.location.pathname)&&nextProps.user.status!=='Success'&&nextProps.user.status!=='Requesting'){
 			this.props.actions.push('/login');
 		}
 	}

@@ -15,9 +15,9 @@ export default class LoginView extends React.Component {
 		}
 	}
 
-	componentDidUpdate(){
-		if (this.props.login.status === "Success") {
-			this.props.actions.push("/");
+	componentWillUpdate(nextProps){
+		if (nextProps.login.status === "Success") {
+			nextProps.actions.push("/");
 		}
 	}
 
