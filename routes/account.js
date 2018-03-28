@@ -11,7 +11,7 @@ router.get('/optTag/getTags',function(req,res,next){
 			data.message=err.message;
 		}else{
 			data.status=200;
-			data.data=tags;
+			data.tags=tags;
 		}
 		res.end(JSON.stringify(data));
 	});
@@ -34,8 +34,22 @@ router.post('/optTag/add', function(req, res, next) {
 });
 
 router.post('/optTag/update',function(req,res,next){
-	let data =req.body;
-	Tag.findOneAndUpdate({_id:data.id},{name:data.name},{new:true},(err,tag)=>{
+	let body =req.body;
+	Tag.findOneAndUpdate({_id:body.id},{name:body.name},{new:true},(err,tag)=>{
+		let data={};
+		if(err){
+			data.status=310;
+			data.message=err.message;
+		}else{
+			data.status=200;
+		}
+		res.end(JSON.stringify(data));
+	});
+
+});
+
+router.get('/optTag/del/:id',function(req,res,next){
+	Tag.deleteOne({_id:req.params.id},(err)=>{
 		let data={};
 		if(err){
 			data.status=310;

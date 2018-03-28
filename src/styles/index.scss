@@ -150,12 +150,12 @@ $fa-font-path:"./fonts";
         position: relative;
 
         .add-tag-button{
-            position:absolute;
+            position:fixed;
             right: 60px;
-            bottom: -550px;
+            bottom: 40px;
             color:#ea214e;
             line-height: 80px;
-            z-index: 9999;
+            z-index: 1000;
             font:{
                 size:80px;
 

@@ -44,7 +44,7 @@ export default function createRequest(url,option,actions){
 			if(data.status>300&&data.status<400){
 				throw new Error(data.message);
 			}else{
-				dispatch(actions.success(data.data));
+				dispatch(actions.success(data));
 			}
 		}).catch(function(err){
 			dispatch(actions.failed(err));

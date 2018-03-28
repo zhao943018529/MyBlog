@@ -3,7 +3,9 @@ import {fetch_tags_success,
 	fetch_tags_start,
 	fetch_tags_error,
 	add_tag_success,
-	add_tag_error} from '../../../../../reducers/TagReducer';
+	add_tag_error,
+	del_tag_success,
+	del_tag_error} from '../../../../../reducers/TagReducer';
 
 
 export default class TagManageView extends React.Component{
@@ -12,13 +14,23 @@ export default class TagManageView extends React.Component{
 		this.state={
 			isExpanded:false,
 			status:'showAll',
-			tag:undefined,
+			message:undefined,
+			requestStatus:undefined,
 		};
 		this.model=null;
 	}
 	
 	componentDidMount(){
-	    this.props.createRequest('/account/optTag/getTags', {
+		this.updateTags();
+	}
+
+	updateTags(){
+		this.setState({
+			message:undefined,
+			requestStatus:undefined,
+		});
+		
+		this.props.createRequest('/account/optTag/getTags', {
 			credentials: 'same-origin'
 			}, {
 				start: fetch_tags_start,
@@ -27,10 +39,23 @@ export default class TagManageView extends React.Component{
 			});
 	}
 
+	componentWillReceiveProps(nextProps){
+		if(nextProps.tag.status==='failed'){
+			this.setState({
+				message:nextProps.tag.message,
+				requestStatus:nextProps.tag.status
+			});
+		}else{
+			this.setState({
+				message:nextProps.tag.message,
+				requestStatus:nextProps.tag.status
+			});
+		}
+	}
 	createTagNodes(){
-
+		let tags = this.props.tag.tags;
 		return (<div className="d-flex justify-content-between flex-wrap">
-				{this.props.tag.tags.map(tag=>this.createTagNode(tag))}
+				{tags.map(tag=>this.createTagNode(tag))}
 			</div>);
 	}
 
@@ -41,15 +66,21 @@ export default class TagManageView extends React.Component{
 	}
 
 	handleModel(isExpanded,status,event){
+		if(!isExpanded){
+			this.updateTags();
+		}
+
 		this.setState({
 			isExpanded:isExpanded,
-			status:status
+			message:undefined,
+			status:status,
+			requestStatus:undefined
 		});
 		event.stopPropagation();
 	}
 
 	createModel(){
-		let {isExpanded,status,tag} = this.state;
+		let {isExpanded,status,message,requestStatus} = this.state;
 		let title;
 		let hideInput;
 		if(status=='add'){
@@ -72,7 +103,20 @@ export default class TagManageView extends React.Component{
 			style:{display:isExpanded?'block':'none'},
 			onClick:event=>this.handleClickCovered(event)
 		};
-		
+
+		let msgEle;
+		if(requestStatus==='failed'){
+			msgEle=(<div className="alert alert-danger" role="alert">
+					<h5 className="alert-heading">Failed!</h5>
+					<p>{message}</p>
+			</div>)
+
+		}else if(requestStatus==='success'){
+			msgEle=(<div className="alert alert-success" role="alert">
+					<h5 className="alert-heading">Success</h5>
+					<p>{message}</p>
+			</div>)
+		}
 		return (
 			<div {...props}>
 			  <div className="modal-dialog modal-dialog-centered" role="document">
@@ -84,6 +128,7 @@ export default class TagManageView extends React.Component{
 			        </button>
 			      </div>
 			      <div className="modal-body">
+			        {msgEle}
 					<form name="TagForm" className="needs-validation">
 						{hideInput}
 						<div className="mb-3">
@@ -147,16 +192,31 @@ export default class TagManageView extends React.Component{
 	createTagNode(tag){
 
 		return (
-			<div key={tag.id} className="card" style={{width: '18rem'}}>
+			<div key={tag.id} className="card" style={{width: '18rem',marginBottom:'6px'}}>
 			  <div className="card-body">
 			    <h5 className="card-title">{tag.name}</h5>
 			    <a href="#" className="card-link">Tag Edit</a>
-			    <a href="#" className="card-link">Tag Del</a>
+			    <a href="#" onClick={this.handleDelTag.bind(this,tag.id)} className="card-link">Tag Del</a>
 			  </div>
 			</div>
 			)
 	}
 
+	handleDelTag(id,event){
+		this.setState({
+			requestStatus:undefined,
+			message:undefined,
+		})
+        this.props.createRequest('/account/optTag/del/'+id, {
+			credentials: 'same-origin'
+			}, {
+				success: del_tag_success,
+				failed: del_tag_error
+			});
+		event.preventDefault();
+		event.stopPropagation();
+	}
+	
 	createCovert(){
 	
 		return (<div className="modal-backdrop fade show"></div>);
@@ -168,15 +228,40 @@ export default class TagManageView extends React.Component{
 			<i className="fa fa-plus-circle"></i>
 		</div>)
 	}
-
+	
 	render(){
-		let covert = this.state.isExpanded?this.createCovert():undefined;
+		let {isExpanded,message,requestStatus} = this.state;
+		let covert = isExpanded?this.createCovert():undefined;
+		let msgBar;
+		let subool = requestStatus==='success';
+		let errbool = requestStatus==='failed';
+		if(subool||errbool){
+			let tipProps={
+				className:subool?"alert alert-success":"alert alert-danger",
+				role:"alert",
+				ref:ele=>{
+					if(ele){
+						let tid = setTimeout(()=>{
+							ele.classList.add('d-none');
+							clearTimeout(tid);
+						},2000);
+						
+					}
+				}
+			};
+			msgBar=(
+				<div {...tipProps}>
+				  {message}
+				</div>
+			);
+		}
 
 		return (
-				<div className={"tag-container "+(this.state.isExpanded&&"modal-open":"")}>
+				<div className={"tag-container "+(isExpanded&&"modal-open":"")}>
 					<div className="d-flex pb-2 mb-3 border-bottom">
 						<h1 className="h2">Tag Management</h1>
-					</div>	
+					</div>
+					{msgBar}	
 					{this.createTagNodes()}
 					{this.createAddTagButton()}
 					{this.createModel()}

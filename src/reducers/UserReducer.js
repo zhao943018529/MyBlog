@@ -2,7 +2,7 @@ export const initialState = {
 	status:'NoLogin'
 };
 
-export const fetch_user_success = (data)=>({type:'FETCH_USER_SUCCESS',payload:data});
+export const fetch_user_success = (data)=>({type:'FETCH_USER_SUCCESS',payload:data.user});
 export const fetch_user_start = ()=>({type:'FETCH_USER_START'});
 export const fetch_user_error = (err)=>({type:'FETCH_USER_ERROR',error:err.message});
 
@@ -16,7 +16,7 @@ export default function(state = initialState, action) {
 		case 'FETCH_USER_SUCCESS':
 			return {
 				status: 'Success',
-				user: action.payload.user
+				user: action.payload
 			};
 		case 'FETCH_USER_ERROR':
 			return {

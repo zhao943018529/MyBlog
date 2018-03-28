@@ -12,7 +12,7 @@ class Header extends React.Component{
 		this.handleClick=this.handleClick.bind(this);
 	}
 
-	componentWillUpdate(nextProps,preState){
+	componentWillReceiveProps(nextProps){
 		console.log(this.props.location);
 		if(this.props.location.pathname!==nextProps.location.pathname){
 			this.props.createRequest('/user/getUser', {
