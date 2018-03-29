@@ -16,6 +16,8 @@ export default class TagManageView extends React.Component{
 			status:'showAll',
 			message:undefined,
 			requestStatus:undefined,
+			tag:undefined,
+			inputValue:'',
 		};
 		this.model=null;
 	}
@@ -52,6 +54,7 @@ export default class TagManageView extends React.Component{
 			});
 		}
 	}
+
 	createTagNodes(){
 		let tags = this.props.tag.tags;
 		return (<div className="d-flex justify-content-between flex-wrap">
@@ -80,15 +83,16 @@ export default class TagManageView extends React.Component{
 	}
 
 	createModel(){
-		let {isExpanded,status,message,requestStatus} = this.state;
+		let {isExpanded,status,message,requestStatus,inputValue} = this.state;
 		let title;
 		let hideInput;
 		if(status=='add'){
 			title='Add Tag';
-		}else{
+		}else if(status=='update'){
 			title='Update Tag';
-			hideInput = <input type="hidden" name="id" />
+			//hideInput = <input type="hidden" name="id" value={tag.id} />
 		}
+
 
 		let props ={
 			key:"opt-tag-model",
@@ -133,7 +137,7 @@ export default class TagManageView extends React.Component{
 						{hideInput}
 						<div className="mb-3">
 			              <label htmlFor="name">Name</label>
-			              <input type="text" className="form-control" name="name" id="name" placeholder="TagName" required />
+			              <input type="text" onChange={this.updateInputValue.bind(this)} className="form-control" name="name" id="name" value={inputValue}  placeholder="TagName" required />
 			              <div className="invalid-feedback" style={{width: '100%'}}>
 			                Your username is required.
 			              </div>
@@ -150,25 +154,25 @@ export default class TagManageView extends React.Component{
 		);
 	}
 
+	updateInputValue(event){
+		this.setState({inputValue:event.target.value});
+		event.preventDefault();
+	}
+
 	handleSubmit(event){
-		let myForm = document.forms['TagForm'];
-		let elems = myForm.elements;
 		let data = {};
 		let url;
-		let tagValue;
+		let {inputValue,tag} =this.state;
 			
 		if(this.state.status==='update'){
-			tagValue=elems[1].value.trim();
-			data[elems[1].name]=tagValue;
 			url='/account/optTag/update';
-			data[elems[0].name]=elems[0].value;
+			data.id=tag.id;
 		}else{
-			tagValue=elems[0].value.trim();
-			data[elems[0].name]=tagValue;
 			url='/account/optTag/add';
 		}
+		data.name=inputValue;
 
-		if(tagValue.length>0){
+		if(inputValue.length>0){
 			this.props.createRequest(url,
 				{
 					method: 'POST',
@@ -195,18 +199,32 @@ export default class TagManageView extends React.Component{
 			<div key={tag.id} className="card" style={{width: '18rem',marginBottom:'6px'}}>
 			  <div className="card-body">
 			    <h5 className="card-title">{tag.name}</h5>
-			    <a href="#" className="card-link">Tag Edit</a>
+			    <a href="#" onClick={this.handleEditTag.bind(this,tag)} className="card-link">Tag Edit</a>
 			    <a href="#" onClick={this.handleDelTag.bind(this,tag.id)} className="card-link">Tag Del</a>
 			  </div>
 			</div>
-			)
+			);
+	}
+	
+	handleEditTag(tag,event){
+		this.setState({
+			tag:tag,
+			isExpanded:true,
+			status:'update',
+			requestStatus:undefined,
+			message:undefined,
+			inputValue:tag.name,
+		});
+		event.preventDefault();
+		event.stopPropagation();
 	}
 
 	handleDelTag(id,event){
 		this.setState({
 			requestStatus:undefined,
 			message:undefined,
-		})
+		});
+
         this.props.createRequest('/account/optTag/del/'+id, {
 			credentials: 'same-origin'
 			}, {
@@ -226,7 +244,7 @@ export default class TagManageView extends React.Component{
 		
 		return (<div key="add-tag-button" className="add-tag-button" onClick={this.handleModel.bind(this,'true','add')}>
 			<i className="fa fa-plus-circle"></i>
-		</div>)
+		</div>);
 	}
 	
 	render(){
