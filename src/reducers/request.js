@@ -45,6 +45,12 @@ export default function createRequest(url,option,actions){
 				throw new Error(data.message);
 			}else{
 				dispatch(actions.success(data));
+				if(actions.aftersuc){
+					let tid = setTimeout(()=>{
+						clearTimeout(tid);
+						actions.aftersuc();
+					},1000);
+				}
 			}
 		}).catch(function(err){
 			dispatch(actions.failed(err));

@@ -229,7 +229,8 @@ export default class TagManageView extends React.Component{
 			credentials: 'same-origin'
 			}, {
 				success: del_tag_success,
-				failed: del_tag_error
+				failed: del_tag_error,
+				aftersuc:()=>this.updateTags(),
 			});
 		event.preventDefault();
 		event.stopPropagation();

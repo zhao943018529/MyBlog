@@ -1,10 +1,43 @@
 import React from 'react';
-import MyDraft from 'root/components/MyDraft'
+import {
+  Editor,
+  createEditorState,
+} from 'medium-draft';
+import MyImageSideButton from './MyImageSideButton';
+import 'medium-draft/lib/index.css';
 
 
 export default class AddBlogView extends React.Component{
+	constructor(props) {
+		super(props);
+		this.sideButtons = [{
+			title: 'Image',
+			component: MyImageSideButton,
+		}];
+
+		this.state = {
+			editorState: createEditorState(), // for empty content
+		};
+
+		/*
+		this.state = {
+		  editorState: createEditorState(data), // with content
+		};
+		*/
+
+		this.onChange = (editorState) => {
+			this.setState({
+				editorState
+			});
+		};
+	}
+
+	componentDidMount() {
+		this.refs.editor.focus();
+	}
 	
 	render(){
+		const { editorState } = this.state;
 		return (
 			<form>
 			<div className="form-group row">
@@ -24,9 +57,10 @@ export default class AddBlogView extends React.Component{
 			     </select>
 			    </div>
 			</div>
-			<div className="form-group">
-				<MyDraft />
-			</div>
+				<div className="form-group">
+				 	<Editor ref="editor" sideButtons={this.sideButtons} 
+				 	        editorState={editorState} onChange={this.onChange} />
+				</div>
 			</form>
 			);
 	}

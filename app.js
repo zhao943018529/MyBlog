@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var multer = require('multer');
+var upload = multer({dest:'uploads/'});
 
 //webpack
 const webpack = require('webpack');
@@ -63,7 +65,14 @@ app.use(session({
   }
 }));
 app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'uploads')));
 
+app.post('/photo/upload', upload.single('image'), function (req, res, next) {
+  res.json({
+    status:200,
+    url:req.file.path
+  });
+});
 app.use(usermw);
 app.use('/user',user);
 app.use('/account',account);
