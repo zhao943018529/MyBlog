@@ -61,7 +61,8 @@ module.exports = {
 	},
 	resolve:{
 		alias:{
-			root:path.resolve(__dirname,'src')
+			root:path.resolve(__dirname,'src'),
+			mydraft:path.resolve(__dirname,'src/components/MyDraft'),
 		}
 	},
 	plugins: [

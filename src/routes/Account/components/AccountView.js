@@ -11,9 +11,9 @@ export default class AccountView extends React.Component{
 	render(){
 		let regex = /(?:\/\w*)*(\/\w*)$/;
 		let pathname =this.props.location.pathname.match(regex)[1];
-		return (<div className="row">
-					<nav className="col-2 bg-light d-none d-sm-block sidebar">
-						<ul className="nav nav-pills flex-column">
+		return (<div className="container-fluid mt-1">
+					<nav className="navbar navbar-light bg-light">
+						<ul className="nav nav-pills">
 							<li className="nav-item">
 								<a className={"nav-link "+(pathname=='/addBlog'&&'active')} onClick={this.handleClick.bind(this,'/account/addBlog')} href="#">
 									Add Blog
@@ -26,9 +26,9 @@ export default class AccountView extends React.Component{
 							</li>
 						</ul>
 					</nav>
-					<main className="col-10 pt-3 ml-sm-auto">
+					<div className="container mt-2">
 						{this.props.children}
-					</main>
+					</div>
 			</div>);
 	}
 }

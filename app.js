@@ -65,12 +65,12 @@ app.use(session({
   }
 }));
 app.use(express.static(path.join(__dirname, 'dist')));
-app.use(express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads',express.static(path.join(__dirname, 'uploads')));
 
 app.post('/photo/upload', upload.single('image'), function (req, res, next) {
   res.json({
     status:200,
-    url:req.file.path
+    url:"/"+req.file.path
   });
 });
 app.use(usermw);
