@@ -1,7 +1,7 @@
 import { injectReducers } from '../../reducers/createReducers';
- import  AddBlog from './routes/AddBlog';
-  import  ManageTag from './routes/ManageTag';
-// import AccountContainer from './container/AccountContainer';
+import  AddBlog from './routes/AddBlog';
+import  ManageTag from './routes/ManageTag';
+import AccountContainer from './container/AccountContainer';
 
 // export default (store) => ({
 // 	path: 'account',
@@ -14,16 +14,9 @@ import { injectReducers } from '../../reducers/createReducers';
 
 export default (store) => ({
 	path: 'account',
+	component:AccountContainer,
+	indexRoute:AddBlog(store),
 	childRoutes: [
-		AddBlog(store),
 		ManageTag(store)
 	],
-	getComponent (nextState, cb) {
-		require.ensure([], (require) => {
-			const AccountContainer = require('./container/AccountContainer').default;
-			// let newReducer = injectReducers(store);
-			// store.reset(newReducer);
-			cb(null, AccountContainer)
-		}, 'account')
-	}
 })

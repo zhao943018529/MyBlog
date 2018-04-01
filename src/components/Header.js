@@ -48,9 +48,42 @@ class Header extends React.Component{
 	}
 
 	handleRoute(path,event){
-		event.preventDefault();
 		console.log(this.props);
 		this.props.push(path);
+		event.preventDefault();
+		event.stopPropagation();
+	}
+
+	handleToggleUserOperations(event){
+		let target = event.currentTarget;
+		let rect = target.getBoundingClientRect();
+		let panel = target.lastElementChild;
+		panel.style.right=0+"px";
+		panel.style.top=rect.height+"px";
+		panel.style.zIndex=1000;
+		panel.classList.toggle('d-none');
+		event.preventDefault();
+		event.stopPropagation();
+	}
+
+	handleBlurUserOperations(event){
+		let container = event.currentTarget;
+		let target = event.relatedTarget||document.activeElement;
+		if(!this.isContain(container,target)){
+			container.lastElementChild.classList.add('d-none');
+		}
+		
+		event.stopPropagation();
+	}
+
+	isContain(parent,child){
+		let current = child.parentNode;
+		while(current){
+			if(current===parent)return true;
+			current=current.parentNode;
+		}
+
+		return false;
 	}
 
 	render(){
@@ -65,12 +98,27 @@ class Header extends React.Component{
 		}
 		let loginInfo;
 		if(this.props.user.status==='Success'){
-			loginInfo= (<a className="nav-link active" onClick={this.handleRoute.bind(this,'/account')} href="#">{this.props.user.user.name}</a>);
+			loginInfo= (<ul className="navbar-nav ml-autoflex-row d-flex">
+				<li className="nav-item position-relative" tabIndex="0" onClick={this.handleToggleUserOperations.bind(this)} onBlur={this.handleBlurUserOperations.bind(this)}>
+      				<a className="nav-link p-2" href="#"><i className="fa fa-plus" aria-hidden="true"></i></a>
+      				<ul className="list-group d-none position-absolute text-nowrap">
+					  <li className="list-group-item" tabIndex="0" onClick={this.handleRoute.bind(this,'/account')}>Write Blog</li>
+					</ul>
+    			</li>
+				<li className="nav-item">
+      				<a className="nav-link p-2" onClick={this.handleRoute.bind(this,'/account')} href="#">{this.props.user.user.name}</a>
+
+    			</li>
+		    </ul>);
 		}else{
-			loginInfo=(<div className="btn-group" role="group" aria-label="Button group">
-		    	<button type="button" onClick={this.handleRoute.bind(this,'/login')} className="btn btn-primary">Login</button>
-		    	<button type="button" onClick={this.handleRoute.bind(this,'/register')} className="btn btn-outline-warning">Register</button>
-		    </div>);
+			loginInfo=(<ul className="navbar-nav ml-autoflex-row d-flex">
+				<li className="nav-item">
+      				<a className="nav-link p-2" onClick={this.handleRoute.bind(this,'/login')} href="#">Login</a>
+    			</li>
+    			<li className="nav-item">
+      				<a className="nav-link p-2" onClick={this.handleRoute.bind(this,'/register')} href="#">Register</a>
+    			</li>
+		    </ul>);
 		}
 		return (
 		<nav className="navbar navbar-expand-md navbar-light bg-light">
@@ -80,7 +128,7 @@ class Header extends React.Component{
 		  </button>
 
 		  <div {...navbarProp} id="navbarSupportedContent">
-		    <ul className="navbar-nav mr-auto">
+		    <ul className="navbar-nav">
 		      <li className="nav-item active">
 		        <a className="nav-link" onClick={this.handleRoute.bind(this,'/')} href="#">Home <span className="sr-only">(current)</span></a>
 		      </li>
@@ -106,8 +154,8 @@ class Header extends React.Component{
 		      <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
 		      <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		    </form>
-		    {loginInfo}
 		  </div>
+			{loginInfo}
 		</nav>
 			);
 	}

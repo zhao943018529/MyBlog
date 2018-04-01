@@ -9,7 +9,6 @@ export default class TagControl extends React.Component{
 
 		this.state={
 			isExpanded:false,
-			selected:[],
 			value:'',
 		};
 
@@ -44,28 +43,27 @@ export default class TagControl extends React.Component{
 
 	handleEnterForTag(event){
 		if(event.keyCode===13){
-			let {value,selected} = this.state.value;
-			let tags = this.props.tags;
+			let {value} = this.state;
+			let {tags,selected} = this.props;
 			if(value&&(value=value.trim())){
 				let reg = new RegExp(value,"ig");
 				let tag = tags.find(tag=>reg.test(tag.name));
 				if(tag){
 					selected.push(tag.id);
 					this.setState({
-						selected:selected,
 						value:'',
-					})
+					},()=>this.props.onValueChange(selected));
 				}
 			}
+			event.preventDefault();
 		}
 
 		event.stopPropagation();
-		return false;
 	}
 
 	createPlaceholder(){
-		let tags = this.props.tags;
-		let {selected,value} = this.state;
+		let {tags,selected}= this.props;
+		let {value} = this.state;
 		let selectdTags = tags.filter(tag=>selected.includes(tag.id));
 		let tagElems = selectdTags.map(tag=>this.createSelectedTag(tag));
 		return (
@@ -77,12 +75,10 @@ export default class TagControl extends React.Component{
 	}
 	
 	handleRemoveTag(id,event){
-		let selected = this.state.selected;
+		let selected = this.props.selected;
 		let index = selected.findIndex(value=>value===id);
 		selected.splice(index,1);
-		this.setState({
-			selected:selected
-		});
+		this.props.onValueChange(selected);
 
 		event.stopPropagation();
 	}
@@ -117,19 +113,17 @@ export default class TagControl extends React.Component{
 	}
 	
 	handleSelectTag(id,event){
-		let { selected } = this.state;
+		let { selected } = this.props;
 		if (!selected.includes(id)) {
 			selected.push(id);
-			this.setState({
-				selected: selected,
-			});
+			this.props.onValueChange(selected);
 		}
 
 		event.stopPropagation();
 	}
 
 	createTabItem(tag){
-		let {selected} = this.state;
+		let {selected} = this.props;
 		let isActive = selected.includes(tag.id);
 
 		return (<li key={tag.id} className="mb-1"><a className={isActive?"tag active":"tag"} onClick={this.handleSelectTag.bind(this,tag.id)} href="javascript: void(0);">{tag.name}</a></li>);
