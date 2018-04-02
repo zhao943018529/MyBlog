@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const articleSchema = new Schema({
 	title: String,
+	user:{type:Schema.Types.ObjectId,ref:'User'},
 	visits: {
 		type: Number,
 		default: 0
@@ -25,14 +26,18 @@ const articleSchema = new Schema({
 	}]
 });
 
+articleSchema.virtual('id').get(function(){
+	return this._id;
+});
+
 articleSchema.set('toJSON',{getters:true,virtual:true});
 articleSchema.set('toObject',{getters:true,virtuals:true});
 articleSchema.path('createTime').get(function(v){
-	return new Date(v).format('yyyy-MM-dd hh:mm:ss');
+	return new Date(v).toString();
 });
 
 articleSchema.path('lastEditTime').get(function(v){
-	return new Date(v).format('yyyy-MM-dd hh:mm:ss');
+	return new Date(v).toString();
 });
 
 module.exports=mongoose.model('Article',articleSchema);

@@ -46,8 +46,7 @@ export default class TagControl extends React.Component{
 			let {value} = this.state;
 			let {tags,selected} = this.props;
 			if(value&&(value=value.trim())){
-				let reg = new RegExp(value,"ig");
-				let tag = tags.find(tag=>reg.test(tag.name));
+				let tag = tags.find(tag=>(tag.name.toLowerCase().indexOf(value)!==-1));
 				if(tag){
 					selected.push(tag.id);
 					this.setState({
@@ -145,7 +144,7 @@ export default class TagControl extends React.Component{
 		let placeholder = this.createPlaceholder();
 		let content = this.createTabContent();
 
-		return (<div className="form-group position-relative" onBlur={this.handleBlurEvent}>
+		return (<div className="position-relative" onBlur={this.handleBlurEvent}>
 			{placeholder}
 			{content}
 		</div>);

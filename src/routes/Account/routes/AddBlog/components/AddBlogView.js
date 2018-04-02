@@ -13,7 +13,7 @@ export default class AddBlogView extends React.Component{
 			tags:[],
 			formData:{
 				title:'',
-				tagIds:[],
+				tags:[],
 				content:'',
 			}
 		}
@@ -33,7 +33,37 @@ export default class AddBlogView extends React.Component{
 	}
 
 	handleSubmit(event){
+		let formData = this.state.formData;
+		fetch('/account/article/add', {
+			method: 'POST',
+			credentials: 'same-origin',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(formData),
+		}).then((response)=>response.json()).then(response=>{
+			if(response.status!=200){
+				throw new Error(response.message);
+			}
 
+			return response;
+		}).then(data=>{
+			this.setState({
+				status: 'success',
+				formData: {
+					title: '',
+					tags: [],
+					content: '',
+				},
+				message: ''
+			});
+		}).catch((error)=>{
+			this.setState({
+				status: 'error',
+				message:error.message,
+			});
+		});
+		event.preventDefault();
 		return false;
 	}
 
@@ -47,7 +77,7 @@ export default class AddBlogView extends React.Component{
 
 	handleTagsChange(ids){
 		let formData = this.state.formData;
-		formData.tagIds = ids;
+		formData.tags = ids;
 		this.setState({
 			formData:formData,
 		});
@@ -76,17 +106,17 @@ export default class AddBlogView extends React.Component{
 		}else{
 			return (
 				<form onSubmit={this.handleSubmit}>
-					<div className="form-group row">
-					    <label htmlFor="title" className="col-sm-2 col-form-label">Title:</label>
-					    <div className="col-sm-10">
-					      <input type="text" value={formData.title} onChange={this.handleTitleChange} className="form-control" id="title" placeholder="title..." />
-					    </div>
+					<div className="form-group">
+					    <label htmlFor="title">Title:</label>
+					    <input type="text" value={formData.title} onChange={this.handleTitleChange} className="form-control" id="title" placeholder="title..." />
 					</div>
-					<TagControl onValueChange={this.handleTagsChange} selected={formData.tagIds} tags={tags}/>
+					<div className="form-group">
+						<TagControl onValueChange={this.handleTagsChange} selected={formData.tags} tags={tags}/>
+					</div>
 					<div className="form-group">
 						<MediumDraftEditor onValueSave={this.handleSaveEditor}/>
 					</div>
-					<button type="button" className="btn btn-primary btn-lg">Submit</button>
+					<button type="submit" className="btn btn-primary btn-lg">Submit</button>
 				</form>
 				);
 		}
