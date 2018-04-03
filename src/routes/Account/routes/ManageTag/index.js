@@ -8,7 +8,7 @@ export default (store) => ({
 			const TagModule = require('../../../../reducers/TagReducer');
 			let newReducer = injectReducers(store,[{key:'tag',reducer:TagModule.default}]);
 			let preState = store.getState();
-			store.reset(newReducer,{...preState,tag:TagModule.initialState});
+			store.reset(newReducer,preState);
 			cb(null, TagManageView);
 		}, 'optTag')
 	}

@@ -8,7 +8,7 @@ export default (store) => ({
 			const SubmitModule = require('../../reducers/SubmitReducer');
 			let newReducer = injectReducers(store,[{key:'login',reducer:SubmitModule.default}]);
 			let preState = store.getState();
-			store.reset(newReducer,{...preState,login:SubmitModule.initialState});
+			store.reset(newReducer,preState);
 			cb(null, LoginView)
 		}, 'login')
 	}

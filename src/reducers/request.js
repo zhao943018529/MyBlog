@@ -33,7 +33,14 @@ export function requrestData(url,option,callbacks){
 	});
 }
 
-export default function createRequest(url,option,actions){
+export default function createRequest(){
+	if(arguments.length<2){
+		throw new Error('parameters size expect gt 2');
+	}
+	let url = arguments[0],actions;
+	let option = arguments[2] && (actions = arguments[2]) ? arguments[1] : (actions = arguments[1]) && {};
+
+
 	return dispatch =>{
 		if(actions.start){
 			dispatch(actions.start());

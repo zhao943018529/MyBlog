@@ -34,7 +34,7 @@ export default class AddBlogView extends React.Component{
 
 	handleSubmit(event){
 		let formData = this.state.formData;
-		fetch('/account/article/add', {
+		fetch('/article/add', {
 			method: 'POST',
 			credentials: 'same-origin',
 			headers: {

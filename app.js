@@ -22,6 +22,7 @@ var user = require('./routes/user');
 const register = require('./routes/register');
 const login = require('./routes/login');
 const account = require('./routes/account');
+const article = require('./routes/article');
 
 //middlewares
 var usermw = require('./middlewares/user');
@@ -75,6 +76,7 @@ app.post('/photo/upload', upload.single('image'), function (req, res, next) {
 });
 app.use(usermw);
 app.use('/user',user);
+app.use('/article',article);
 app.use('/account',account);
 app.use('/login',login);
 app.use('/register',register);

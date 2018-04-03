@@ -15,7 +15,7 @@ export default class AccountView extends React.Component{
 					<nav className="navbar navbar-light bg-light">
 						<ul className="nav nav-pills">
 							<li className="nav-item">
-								<a className={"nav-link "+(pathname=='/addBlog'&&'active')} onClick={this.handleClick.bind(this,'/account/addBlog')} href="#">
+								<a className={"nav-link "+(pathname=='/addBlog'&&'active')} onClick={this.handleClick.bind(this,'/account')} href="#">
 									Add Blog
 								</a>
 							</li>

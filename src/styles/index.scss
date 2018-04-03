@@ -264,17 +264,21 @@ $fa-font-path:"./fonts";
   background-color: #fff;
   border-radius: 4px;
   z-index:2;
+}
 
-  & .taglist-inline{
-        list-style:none;
-        padding:0;
-        margin-bottom:0;
+.taglist-inline{
+    list-style:none;
+    padding:0;
+    margin-bottom:0;
 
-        & > li{
-            display:inline-block;
-            margin-right:5px;
-        }
-  }
+    &.ib{
+        display:inline-block;
+    }
+
+    & > li{
+        display:inline-block;
+        margin-right:5px;
+    }
 }
 
 .tag{
@@ -296,3 +300,17 @@ $fa-font-path:"./fonts";
 
 
 /**End**/
+
+.article-item{
+   padding:12px 6px;
+   border-bottom:1px #eee solid;
+}
+
+.article-title{
+  display: inline;
+}
+
+.article-title > a{
+  font-size:20px;
+  color: #212121;
+}

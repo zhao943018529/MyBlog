@@ -64,6 +64,7 @@ module.exports = {
 			root:path.resolve(__dirname,'src'),
 			mydraft:path.resolve(__dirname,'src/components/MyDraft'),
 			controls:path.resolve(__dirname,'src/components'),
+			reducers:path.resolve(__dirname,'src/reducers'),
 		}
 	},
 	plugins: [
