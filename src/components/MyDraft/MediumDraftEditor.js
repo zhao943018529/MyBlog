@@ -4,6 +4,7 @@ import {
   convertToRaw,
   convertFromRaw,
   KeyBindingUtil,
+  Modifier,
 } from 'draft-js';
 import {
   Editor,
@@ -111,13 +112,15 @@ export default class MediumDraftEditor extends React.Component{
 	constructor(props) {
 		super(props);
 		this.state = {
-			editorState: createEditorState(),
-			editorEnabled: true,
+			editorState: createEditorState(props.content),
+			editorEnabled: props.editorEnabled,
 			placeholder: 'Write here...',
 		};
 
 		this.onChange = (editorState, callback = null) => {
 			if (this.state.editorEnabled) {
+				let content = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
+				this.props.onValueSave(content);
 				this.setState({
 					editorState
 				}, () => {
@@ -163,6 +166,7 @@ export default class MediumDraftEditor extends React.Component{
 		newWin.onload = () => {
 			newWin.postMessage(eHTML, window.location.origin);
 		};
+		e.preventDefault();
 	}
 
 	rendererFn(setEditorState, getEditorState) {
@@ -220,7 +224,6 @@ export default class MediumDraftEditor extends React.Component{
 	handleKeyCommand(command) {
 		if (command === 'editor-save') {
 			let content = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
-			this.props.onValueSave(content);
 			window.localStorage['editor'] = content;
 			return true;
 		} else if (command === 'load-saved-data') {
@@ -249,6 +252,8 @@ export default class MediumDraftEditor extends React.Component{
 		this.setState({
 			editorEnabled: !this.state.editorEnabled
 		});
+		e.preventDefault();
+		e.stopPropagation();
 	}
 
 	handleDroppedFiles(selection, files) {

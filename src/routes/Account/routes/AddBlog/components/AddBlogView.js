@@ -114,7 +114,7 @@ export default class AddBlogView extends React.Component{
 						<TagControl onValueChange={this.handleTagsChange} selected={formData.tags} tags={tags}/>
 					</div>
 					<div className="form-group">
-						<MediumDraftEditor onValueSave={this.handleSaveEditor}/>
+						<MediumDraftEditor editorEnabled={true} content={formData.content} onValueSave={this.handleSaveEditor}/>
 					</div>
 					<button type="submit" className="btn btn-primary btn-lg">Submit</button>
 				</form>
