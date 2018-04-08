@@ -112,7 +112,7 @@ export default class MediumDraftEditor extends React.Component{
 	constructor(props) {
 		super(props);
 		this.state = {
-			editorState: createEditorState(props.content),
+			editorState: createEditorState(props.content&&JSON.parse(props.content)),
 			editorEnabled: props.editorEnabled,
 			placeholder: 'Write here...',
 		};
@@ -281,10 +281,6 @@ export default class MediumDraftEditor extends React.Component{
 		const { editorState, editorEnabled } = this.state;
 		return (
 			      <div>
-			        <div className="editor-action">
-			          <button onClick={this.renderHTML}>Render HTML</button>
-			          <button onClick={this.toggleEdit}>Toggle Edit</button>
-			        </div>
 			        <Editor
 			          ref={(e) => {this._editor = e;}}
 			          editorState={editorState}

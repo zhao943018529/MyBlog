@@ -98,7 +98,7 @@ class Header extends React.Component{
 		}
 		let loginInfo;
 		if(this.props.user.status==='Success'){
-			loginInfo= (<ul className="navbar-nav ml-autoflex-row d-flex">
+			loginInfo= (<ul className="navbar-nav ml-auto flex-row d-flex">
 				<li className="nav-item position-relative" tabIndex="0" onClick={this.handleToggleUserOperations.bind(this)} onBlur={this.handleBlurUserOperations.bind(this)}>
       				<a className="nav-link p-2" href="#"><i className="fa fa-plus" aria-hidden="true"></i></a>
       				<ul className="list-group d-none position-absolute text-nowrap">
@@ -111,7 +111,7 @@ class Header extends React.Component{
     			</li>
 		    </ul>);
 		}else{
-			loginInfo=(<ul className="navbar-nav ml-autoflex-row d-flex">
+			loginInfo=(<ul className="navbar-nav ml-auto flex-row d-flex">
 				<li className="nav-item">
       				<a className="nav-link p-2" onClick={this.handleRoute.bind(this,'/login')} href="#">Login</a>
     			</li>
@@ -123,10 +123,6 @@ class Header extends React.Component{
 		return (
 		<nav className="navbar navbar-expand-md navbar-light bg-light">
 		  <a className="navbar-brand" href="#">ZCC</a>
-		  <button {...btnProps} type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		    <span className="navbar-toggler-icon"></span>
-		  </button>
-
 		  <div {...navbarProp} id="navbarSupportedContent">
 		    <ul className="navbar-nav">
 		      <li className="nav-item active">
@@ -155,7 +151,10 @@ class Header extends React.Component{
 		      <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		    </form>
 		  </div>
-			{loginInfo}
+		  {loginInfo}
+		<button {...btnProps} type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		    <span className="navbar-toggler-icon"></span>
+		 </button>
 		</nav>
 			);
 	}

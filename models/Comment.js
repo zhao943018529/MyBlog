@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 
 const commentSchema = new Schema({
 	article:{
-		Schema.Types.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'Article'
 	},
 	message:String,
 	respondTo:{
-	  	id: Schema.Types.ObjectId,
+	  	type: Schema.Types.ObjectId,
       	ref: 'comment'
 	},
 	createTime:{

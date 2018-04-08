@@ -26,7 +26,7 @@ export default class AccountView extends React.Component{
 							</li>
 						</ul>
 					</nav>
-					<div className="container mt-2">
+					<div className="container-fluid mt-2">
 						{this.props.children}
 					</div>
 			</div>);

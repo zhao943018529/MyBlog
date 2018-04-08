@@ -5,6 +5,7 @@ import PageNotFound from './PageNotFound';
 import redirect from './PageNotFound/redirect';
 import Register from './Register';
 import Login from './Login';
+import Article from './Article';
 
 export const createRoutes = (store)=>({
 	path:'/',
@@ -13,6 +14,7 @@ export const createRoutes = (store)=>({
 	childRoutes:[
 		Home(store),
 		Account(store),
+		Article(store),
 		Register(store),
 		Login(store),
 		PageNotFound(),

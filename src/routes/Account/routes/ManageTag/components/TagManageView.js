@@ -254,7 +254,7 @@ export default class TagManageView extends React.Component{
 		let msgBar;
 		let subool = requestStatus==='success';
 		let errbool = requestStatus==='failed';
-		if(subool||errbool){
+		if(!isExpanded&&(subool||errbool)){
 			let tipProps={
 				className:subool?"alert alert-success":"alert alert-danger",
 				role:"alert",

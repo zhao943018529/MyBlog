@@ -313,4 +313,9 @@ $fa-font-path:"./fonts";
 .article-title > a{
   font-size:20px;
   color: #212121;
+  font-weight:400;
+}
+
+.article-title > a:hover{
+    color:#017e66;
 }

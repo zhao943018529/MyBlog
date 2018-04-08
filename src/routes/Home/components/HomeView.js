@@ -2,7 +2,7 @@ import React from "react";
 import {
 	fetch_articles_success,
 	fetch_articles_start,
-	fetch_articles_error} from 'reducers/ArticleReducer';
+	fetch_articles_error} from 'reducers/ArticlesReducer';
 
 export default class HomeView extends React.Component {
 
