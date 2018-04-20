@@ -318,4 +318,32 @@ $fa-font-path:"./fonts";
 
 .article-title > a:hover{
     color:#017e66;
+    text-decoration: none;
+    padding-bottom: 3px;
+    border-bottom: 1px solid;
 }
+
+
+/*CommentControl css*/
+.comment-box{
+  background:#FAFAFA;
+  padding: 15px 20px;
+  box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.09);
+  border-radius: 2px 2px 0px 0px;
+  border-top: 1px solid rgba(0,0,0,0.09);
+
+    & .pull-left{
+      font-size:24px;
+      float:left;
+    }
+
+    & .comment-content{
+        margin-left:40px;
+
+        & textarea{
+            max-height: 132px;
+            min-height: 90px;
+        }
+    }
+}
+/*end*/

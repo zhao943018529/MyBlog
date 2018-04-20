@@ -1,5 +1,6 @@
 import React from 'react';
 import MediumDraftEditor from 'mydraft/MediumDraftEditor';
+import CommentCotrol from 'controls/CommentCotrol';
 import 'whatwg-fetch'
 
 
@@ -38,10 +39,28 @@ export default class ArticleView extends React.Component{
 		
 	}
 
-
+	induceToLoginOrRegister(path,event){
+		this.props.push(path);
+		event.stopPropagation();
+	}
 
 	render(){
 		let {status,article,message}  = this.state;
+		console.log(article);
+		let uStatus = this.props.user.status;
+		let comment;
+		if(uStatus==='Success'){
+			let action = `/article/${this.props.params.id}/comment/add`;
+			comment = <CommentCotrol action={action}/>;
+		}else{
+			comment=(
+				<div className="btn-group" role="group" aria-label="sign in or sign up">
+					<button type="button" onClick={this.induceToLoginOrRegister.bind(this,'/login')} className="btn btn-link">Sign in</button>
+					or
+					<button type="button" onClick={this.induceToLoginOrRegister.bind(this,'/register')} className="btn btn-link">Sign up</button>
+				</div>
+			);
+		}
 		let msgBar;
 		let content;
 		if(status==='error'){
@@ -60,6 +79,7 @@ export default class ArticleView extends React.Component{
 			<div className="container">
 				{msgBar}
 				{content}
+				{comment}
 			</div>
 			);
 	}

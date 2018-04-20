@@ -9,17 +9,22 @@ const commentSchema = new Schema({
 	message:String,
 	respondTo:{
 	  	type: Schema.Types.ObjectId,
-      	ref: 'comment'
+      	ref: 'User'
 	},
 	createTime:{
-		type:Date
+		type:Date,
+		default: Date.now,
+	},
+	author:{
+		type: Schema.Types.ObjectId,
+		ref: 'User',
+		required: true,
 	}
-	author:String
 });
 
 
 commentSchema.path('createTime').get(function(v){
-	return new Date(v).format('yyyy-MM-dd hh:mm:ss');
+	return new Date(v).toString();
 });
 
-module.exports = mongoose.modal('Comment',commentSchema);
+module.exports = mongoose.model('Comment',commentSchema);
