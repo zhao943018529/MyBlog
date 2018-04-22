@@ -43,6 +43,20 @@ $fa-font-path:"./fonts";
 @import "node_modules/bootstrap/scss/utilities";
 @import "./scss/font-awesome";
 
+/*comment style*/
+
+.pull-right{
+    float:right;
+}
+
+.pull-left{
+    float:left;
+}
+
+.fontSize18{
+    font-size:18px;
+}
+/*End*/
 
 .sidebar {
     position: fixed;
@@ -324,7 +338,7 @@ $fa-font-path:"./fonts";
 }
 
 
-/*CommentControl css*/
+/*Edit CommentControl css*/
 .comment-box{
   background:#FAFAFA;
   padding: 15px 20px;
@@ -334,7 +348,6 @@ $fa-font-path:"./fonts";
 
     & .pull-left{
       font-size:24px;
-      float:left;
     }
 
     & .comment-content{
@@ -347,3 +360,50 @@ $fa-font-path:"./fonts";
     }
 }
 /*end*/
+
+/*Comment Control style*/
+.comments-item{
+  font-size:14px;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.09);
+
+  & .comments-container{
+      margin-left:40px;
+
+    & .comment-reply{
+      background-color: #FAFAFA;
+
+      & ul{
+          list-style:none;
+          padding:0;
+        }
+      & .comment-replyitem{
+            padding-left:40px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            border-bottom: 1px dashed rgba(0,0,0,0.09);
+
+            & .comment-content p {
+                margin-bottom: 5px;
+            }
+
+            & .reply-tip{
+              font-size:12px;
+            }
+        }
+    }
+
+    & .reply-button{
+        
+    }
+
+    & .reply-form{
+
+       & .form-group{
+            margin-right:180px;
+       }
+    }
+  }
+}
+
+/*End*/

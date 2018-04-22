@@ -1,6 +1,7 @@
 import React from 'react';
 import MediumDraftEditor from 'mydraft/MediumDraftEditor';
-import CommentCotrol from 'controls/CommentCotrol';
+import EditCommentControl from 'controls/EditCommentControl';
+import CommentControl from 'controls/CommentControl';
 import 'whatwg-fetch'
 
 
@@ -44,16 +45,26 @@ export default class ArticleView extends React.Component{
 		event.stopPropagation();
 	}
 
+	createComments(){
+		let user = this.props.user.user;
+		let article= this.state.article;
+		let comments = (article&&this.state.article.comments)||[];
+
+		return (<div className="comments-container">
+				{comments.map(comment=>(<CommentControl currentUser={user} articleId={article.id} comment={comment} />))}
+			</div>);
+	}
+
 	render(){
 		let {status,article,message}  = this.state;
 		console.log(article);
 		let uStatus = this.props.user.status;
-		let comment;
+		let editComment;
 		if(uStatus==='Success'){
 			let action = `/article/${this.props.params.id}/comment/add`;
-			comment = <CommentCotrol action={action}/>;
+			editComment = <EditCommentControl action={action}/>;
 		}else{
-			comment=(
+			editComment=(
 				<div className="btn-group" role="group" aria-label="sign in or sign up">
 					<button type="button" onClick={this.induceToLoginOrRegister.bind(this,'/login')} className="btn btn-link">Sign in</button>
 					or
@@ -79,7 +90,8 @@ export default class ArticleView extends React.Component{
 			<div className="container">
 				{msgBar}
 				{content}
-				{comment}
+				{this.createComments()}
+				{editComment}
 			</div>
 			);
 	}

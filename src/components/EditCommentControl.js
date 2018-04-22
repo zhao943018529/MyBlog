@@ -1,7 +1,7 @@
 import React from 'react';
 import 'whatwg-fetch';
 
-export default class CommentCotrol extends React.Component{
+export default class EditCommentControl extends React.Component{
 
 	constructor(props){
 		super(props);
