@@ -21,7 +21,8 @@ export function requrestData(url,option,callbacks){
 	if(callbacks&&callbacks.length===3){
 		callbacks.splice(0,1)[0]();
 	}
-	
+	option=option||{};
+
 	fetch(url,option).then(checkStatus).then(parseJSON).then((data)=>{
 			if(data.status>300&&data.status<400){
 				throw new Error(data.message);

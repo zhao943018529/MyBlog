@@ -30,7 +30,7 @@ articleSchema.virtual('id').get(function(){
 	return this._id;
 });
 
-articleSchema.set('toJSON',{getters:true,virtual:true});
+articleSchema.set('toJSON',{getters:true,virtuals:true});
 articleSchema.set('toObject',{getters:true,virtuals:true});
 articleSchema.path('createTime').get(function(v){
 	return new Date(v).toString();

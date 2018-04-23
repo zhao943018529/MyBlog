@@ -22,6 +22,11 @@ const commentSchema = new Schema({
 	}
 });
 
+commentSchema.virtual('id').get(function(){
+	return this._id;
+});
+
+commentSchema.set('toJSON',{getter:true,virtuals:true});
 
 commentSchema.path('createTime').get(function(v){
 	return new Date(v).toString();

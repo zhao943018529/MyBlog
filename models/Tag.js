@@ -10,6 +10,6 @@ tagSchema.virtual('id').get(function(){
 });
 
 tagSchema.set('toJSON', { getters: true, virtuals: true});
-tagSchema.set('toObject', { getters: true, virtuals: true});
+tagSchema.set('toObject', { getters: true,virtuals:true});
 
 module.exports = mongoose.model('Tag', tagSchema);

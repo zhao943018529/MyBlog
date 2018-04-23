@@ -24,23 +24,23 @@ router.get('/getSummary/:page', function(req, res, next) {
 	});
 });
 
-router.post('/:respondTo/comment/reply',function(req,res,next){
+router.post('/comment/reply',function(req,res,next){
 	let data={};
 	if(req.user){
 		let respondTo = req.params.respondTo;
 		let comment = new Comment({
-			respondTo:respondTo,
-			message:req.body.comment,
+			respondTo:req.body.respondTo,
+			message:req.body.message,
 			author:req.user.id,
 		});
 
-		comment.save(function(err,doc){
+		comment.save(function(err,comment){
 			if(err){
 				data.status=301;
 				data.message=err.message;
 			}else{
 				data.status=200;
-				data.message="submit comment successfully";
+				data.comment=comment;
 			}
 		});
 	}else{

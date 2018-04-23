@@ -39,6 +39,8 @@ UserSchema.virtual('id').get(function() {
 	return this._id;
 });
 
+UserSchema.set('toJSON',{gettters:true,virtuals:true});
+
 UserSchema.statics = {
 	getUserByName: function(username, callback) {
 		return this.findOne({

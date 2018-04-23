@@ -7,7 +7,7 @@ export default class CommentControl extends React.Component{
 		super(props);
 		this.state={
 			editing:false,
-			comment:'',
+			message:'',
 		}
 	}
 
@@ -50,27 +50,26 @@ export default class CommentControl extends React.Component{
 	}
 	
 	handleSubmit(event){
-		let content = this.state.content;
-		let {comment,currentUser,articleId} = this.props;
+		let message = this.state.message;
+		let {comment,articleId,executeReply} = this.props;
 		let data = {
-			message:content,
+			message:message,
 			respondTo:comment.author.id,
-			author:currentUser.id,
 			article:articleId,
 		}
 
-		console.log(data);
+		executeReply(data);
 		event.preventDefault();
 	}
 
 	handleValueChange(event){
 		this.setState({
-			comment:event.target.value,
+			message:event.target.value,
 		});
 	}
 	
 	createReplyForm(){
-		let comment = this.state.comment;
+		let message = this.state.message;
 		let style={
 			minHeight: '35px',
 			maxHeight: '132px',
@@ -83,16 +82,17 @@ export default class CommentControl extends React.Component{
 				<form className="reply-form" action="#" >
 					<div className="pull-right" role="group">
 				  		<button type="button" onClick={this.handleSubmit.bind(this)} className="btn btn-outline-primary">Reply</button>
-				  		<button type="button" onClick={this.onClickReply.bind(this,false)} className="btn btn-light">Cancel</button>
+				  		<button type="button" onClick={this.onClickReply.bind(this,false)} className="ml-2 btn btn-light">Cancel</button>
 				    </div>
 	                <div className="form-group">
-	                    <textarea style={style} name="text" value={comment} onChange={this.handleValueChange.bind(this)} className="form-control reply-text" rows="1" placeholder="文明社会，理性评论"></textarea>
+	                    <textarea style={style} name="text" value={message} onChange={this.handleValueChange.bind(this)} className="form-control reply-text" rows="1" placeholder="文明社会，理性评论"></textarea>
 	                </div>
 	            </form>
 	    );
 	}
 
 	onClickReply(editing,event){
+
 		this.setState({
 			editing:editing,
 		});

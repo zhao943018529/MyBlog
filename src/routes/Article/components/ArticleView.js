@@ -13,6 +13,8 @@ export default class ArticleView extends React.Component{
 			status:'loading',
 			message:'',
 		};
+
+		this.executeReply = this._executeReply.bind(this);
 	}
 
 	componentWillMount(){
@@ -25,6 +27,22 @@ export default class ArticleView extends React.Component{
 						status:'success',
 						article:data.article,
 					});
+					data.article.
+					fetch('',{
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body:J
+					})then(response=>response.json()).then(data=>{
+						if(data.status==200){
+
+						}else{
+							throw new Error(data.message);
+						}
+					}).catch(err=>{
+
+					});				
 				}else{
 					throw new Error(data.message);
 				}
@@ -45,13 +63,33 @@ export default class ArticleView extends React.Component{
 		event.stopPropagation();
 	}
 
+	_executeReply(data){
+		console.log('-------');
+		fetch('/article/comment/reply', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			credentials: 'same-origin',
+			body: JSON.stringify(data),
+		}).then(response => response.json()).then(data=>{
+			if(data.status==200){
+				
+			}else{
+				throw new Error(data.message);
+			}
+		}).catch(err=>{
+			console.log(err.message);
+		});
+	}
+
 	createComments(){
-		let user = this.props.user.user;
-		let article= this.state.article;
+		let {article,editing}= this.state;
 		let comments = (article&&this.state.article.comments)||[];
 
 		return (<div className="comments-container">
-				{comments.map(comment=>(<CommentControl currentUser={user} articleId={article.id} comment={comment} />))}
+				{comments.map(comment=>(<CommentControl executeReply={this.executeReply} 
+					articleId={article.id} comment={comment} />))}
 			</div>);
 	}
 
